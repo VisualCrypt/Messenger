@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="Obsidian.UWP.Controls.Chat.Messages.MessageThreadHeaderUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource SemitransParentGridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="/Assets/App/Profile.png" Width="40" Margin="10"/>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,10,0,0"
+                    HorizontalAlignment="Left">
+                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" Margin="0"
+                               Text="{x:Bind _contactsViewModel.CurrentContact.Name, Mode=OneWay}"/>
+                    <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Margin="0"><Run>@</Run><Run Text="{x:Bind _contactsViewModel.CurrentContact.Id, Mode=OneWay}"></Run></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Column="1">
+                <!--<Button Grid.Column="0" x:Name="ButtonCall" Tapped="ButtonCall_OnTapped" Style="{StaticResource SendAttachButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                Padding="0" Margin="15">
+                    <SymbolIcon Symbol="Phone"  />
+                </Button>-->
+            </Grid>
+            <Grid Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" HorizontalAlignment="Right" Margin="0"
+                               Text="{x:Bind _profileViewModel.Profile.Name, Mode=OneWay}"/>
+                    <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Margin="0" HorizontalAlignment="Right"><Run>@</Run><Run Text="{x:Bind _profileViewModel.Profile.Id, Mode=OneWay}"></Run></TextBlock>
+                </StackPanel>
+                <Image Grid.Column="1"  Width="40" Margin="10" Source="{x:Bind _profileViewModel.ProfileImage, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+ 
+</UserControl>
+

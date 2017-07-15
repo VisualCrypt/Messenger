@@ -1,0 +1,1 @@
+winappdeploycmd install -file C:\VisualCrypt\VisualCrypt.Windows_1.0.0.0_Debug_Test\VisualCrypt.Windows_1.0.0.0_arm_Debug.appxbundle -ip 192.168.2.20 -pin N3Y9f4

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Server\SampleServer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Server\SampleServer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ApplicationLogic\Obsidian.Common\Obsidian.Common.csproj" />
+    <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography.NetStandard\Obsidian.Cryptography.NetStandard.csproj" />
+    <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography\Obsidian.Cryptography.csproj" />
+  </ItemGroup>
+
+</Project>

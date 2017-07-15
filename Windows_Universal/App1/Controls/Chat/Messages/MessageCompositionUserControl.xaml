@@ -1,0 +1,60 @@
+﻿<UserControl
+    x:Class="Obsidian.UWP.Controls.Chat.Messages.CompositionUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid Style="{StaticResource SemitransParentGridStyle}"  VerticalAlignment="Bottom">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="0" x:Name="ButtonAddMedia" Tapped="OnButtonAddMediaTapped" Style="{StaticResource SendAttachButtonStyle}"
+                Padding="10,20,10,15">
+            <SymbolIcon Symbol="Attach"  />
+        </Button>
+        <Border Grid.Column="1" VerticalAlignment="Bottom"
+                Margin="5"
+                BorderThickness="0.5" 
+                BorderBrush="#F888"
+                Background="White"
+                Padding="6,6,6,0"
+                CornerRadius="5"
+                >
+            <TextBox  x:Name="CompositionBox"
+                 FontSize="16"
+                 IsSpellCheckEnabled="False" 
+                 IsTextPredictionEnabled="False"
+                 IsTextScaleFactorEnabled="False"
+                 AcceptsReturn="True" 
+                 TextWrapping="Wrap" 
+                 Background="White"
+                 Foreground="Black"
+                      BorderThickness="0"
+                      BorderBrush="Transparent"
+                      Margin="0"
+                      Padding="0"
+                 ScrollViewer.BringIntoViewOnFocusChange="False"
+                 ScrollViewer.HorizontalScrollMode="Enabled"
+                 ScrollViewer.VerticalScrollMode="Enabled"
+                 ScrollViewer.IsDeferredScrollingEnabled="False"
+                 ScrollViewer.IsScrollInertiaEnabled="False"
+                 ScrollViewer.IsVerticalRailEnabled="False"
+                 ScrollViewer.ZoomMode="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                 />
+        </Border>
+            <Button Grid.Column="2" x:Name="ButtonSend" Style="{StaticResource SendAttachButtonStyle}" 
+                    Tapped="OnButtonSendTapped" Padding="15,20,20,15">
+                <SymbolIcon Symbol="Forward" />
+            </Button>
+    </Grid>
+</UserControl>

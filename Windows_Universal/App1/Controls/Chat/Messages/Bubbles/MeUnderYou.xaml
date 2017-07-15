@@ -1,0 +1,27 @@
+﻿<bubbles:BubbleBase
+    x:Class="Obsidian.UWP.Controls.Chat.Messages.Bubbles.MeUnderYou"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bubbles="using:Obsidian.UWP.Controls.Chat.Messages.Bubbles">
+    <Grid Margin="30, 5, 5, 0" HorizontalAlignment="Right">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Path Grid.Row="0" Data="F1 M 0,16L 16,0L 16,16L 0,16 Z" Fill="{StaticResource MeBackgroundBrush}"
+                              Margin="0,0,5,-1" HorizontalAlignment="Right" />
+        <Rectangle Grid.Row="1" Grid.RowSpan="2"  Fill="{StaticResource MeBackgroundBrush}" RadiusX="5" RadiusY="5" />
+        <ContentControl Grid.Row="1" x:Name="ContentView1"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock x:Name="TextBlockDateString1" Style="{StaticResource TimestampStyle}"/>
+            <TextBlock xml:space="preserve" Style="{StaticResource TimestampStyle}" Text=" - "></TextBlock>
+            <TextBlock x:Name="TextBlockSendMessageState1"  Style="{StaticResource TimestampStyle}"/>
+        </StackPanel>
+    </Grid>
+</bubbles:BubbleBase>
+
+
+

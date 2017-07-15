@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <Authors>githib.com/netsfx</Authors>
+    <Copyright>githib.com/netsfx</Copyright>
+  </PropertyGroup>
+
+</Project>

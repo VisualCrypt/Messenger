@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <DiscreteExceptions>
+      <Term>Cleartext</Term>
+      <Term>SHA</Term>
+    </DiscreteExceptions>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>AES</Acronym>
+      <Acronym>SHA</Acronym>
+      <Acronym>SHA</Acronym>
+      <Acronym>MAC</Acronym>
+      <Acronym>API</Acronym>
+      <Acronym>UTF</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>
