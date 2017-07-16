@@ -1,7 +1,7 @@
 ﻿using Obsidian.Applications.Infrastructure;
 using Obsidian.Applications.Services.Interfaces;
 using Obsidian.Cryptography.Api;
-using VisualCrypt.Language.Strings;
+using Obsidian.Language.Strings;
 
 namespace Obsidian.Applications.Models
 {

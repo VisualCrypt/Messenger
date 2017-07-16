@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <Grid Style="{StaticResource SemitransParentGridStyle}"  VerticalAlignment="Bottom">
+    <Grid x:Name="MainGrid" Style="{StaticResource SemitransParentGridStyle}"  VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>

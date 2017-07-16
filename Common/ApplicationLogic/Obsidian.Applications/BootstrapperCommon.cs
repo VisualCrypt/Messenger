@@ -4,7 +4,7 @@ using Obsidian.Applications.Services.PortableImplementations;
 using Obsidian.Applications.ViewModels.Chat;
 using Obsidian.Applications.Workers;
 using Obsidian.Common;
-using VisualCrypt.Language.Strings;
+using Obsidian.Language.Strings;
 
 namespace Obsidian.Applications
 {

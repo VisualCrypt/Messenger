@@ -9,14 +9,25 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <Grid>
-        <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/App/BG_Sunset.jpg" AlignmentY="Top" AlignmentX="Center"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <messages:MessageThreadUserControl Grid.Row="1" x:Name="MessageThreadUserControl" x:FieldModifier="internal"/>
-        <messages:MessageThreadHeaderUserControl Grid.Row="0" x:Name="MessageThreadHeaderUserControl" x:FieldModifier="internal"/>
+        <Grid x:Name="MainGrid">
+            <Grid.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/App/BG_Sunset.jpg" AlignmentY="Top" AlignmentX="Center"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <messages:MessageThreadUserControl Grid.Row="1" x:Name="MessageThreadUserControl" x:FieldModifier="internal"/>
+            <messages:MessageThreadHeaderUserControl Grid.Row="0" x:Name="MessageThreadHeaderUserControl" x:FieldModifier="internal"/>
+        </Grid>
+        <Grid x:Name="WelcomeGrid" Background="{StaticResource AccentColorBrush3}">
+           
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+           <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="{StaticResource AccentColorBrush5}">Please select or add contact.</TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

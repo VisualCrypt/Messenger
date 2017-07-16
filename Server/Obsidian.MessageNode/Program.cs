@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Obsidian.MessageNode.Core;
+using Obsidian.MessageNode.Core.Server;
 using Obsidian.MessageNode.Core.Server.CP;
 
 namespace Obsidian.MessageNode
@@ -22,6 +23,8 @@ namespace Obsidian.MessageNode
                 .UseApplicationInsights()
                 .Build();
 			StartServer.Start();
+			var udps = new UdpServer();
+	        Task.Run(()=> udps.Run(new CancellationTokenSource().Token));
 			//var server = new VisualCryptMessageServer("testserver");
 	  //      server.RunAsync(new CancellationTokenSource().Token);
 

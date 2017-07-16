@@ -51,15 +51,15 @@ namespace Obsidian.MessageNode.Core
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                try
-                {
-                    var udpServer = new UdpServer(_serverRequestHandler);
-                    udpServer.Run(cancellationToken).Wait(cancellationToken);
-                }
-                catch (Exception e)
-                {
-                    Log.Error("UdpServer blew up: {e.Message}");
-                }
+                //try
+                //{
+                //    var udpServer = new UdpServer(_serverRequestHandler);
+                //    udpServer.Run(cancellationToken).Wait(cancellationToken);
+                //}
+                //catch (Exception e)
+                //{
+                //    Log.Error("UdpServer blew up: {e.Message}");
+                //}
             }
         }
     }

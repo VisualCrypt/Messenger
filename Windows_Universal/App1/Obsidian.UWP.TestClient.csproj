@@ -18,6 +18,11 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>App1_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\osmdeploy\</AppxPackageDir>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Never</AppxBundle>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -310,6 +315,10 @@
       <Project>{6272b2de-fa0c-40c9-9b61-666370f96b91}</Project>
       <Name>Obsidian.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\ApplicationLogic\Obsidian.Language\Obsidian.Language.csproj">
+      <Project>{71030b59-485e-414c-83dd-bd8f0b2b308e}</Project>
+      <Name>Obsidian.Language</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography.NetStandard\Obsidian.Cryptography.NetStandard.csproj">
       <Project>{e40358ef-ccce-4bd3-8b7d-7c9d8a525a07}</Project>
       <Name>Obsidian.Cryptography.NetStandard</Name>
@@ -322,12 +331,6 @@
       <Project>{1752c00d-5d33-419c-8ec5-0c6f192b4685}</Project>
       <Name>Obsidian.UWP.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="VisualCrypt.Language, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\osm\osm\LanguagePC\Debug\VisualCrypt.Language.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.15063.0">

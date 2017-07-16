@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Obsidian.Applications.Services.Interfaces;
-using VisualCrypt.Language.Strings;
+using Obsidian.Language.Strings;
 
 namespace Obsidian.UWP.Core.Services
 {

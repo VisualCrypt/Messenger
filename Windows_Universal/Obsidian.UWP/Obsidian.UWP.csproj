@@ -21,7 +21,7 @@
     <PackageCertificateThumbprint>1BD87A18E57F3D36D261EFA99876C353A93E64EA</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxPackageDir>C:\osmdeploy\</AppxPackageDir>
-    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
@@ -372,6 +372,10 @@
       <Project>{6272b2de-fa0c-40c9-9b61-666370f96b91}</Project>
       <Name>Obsidian.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\ApplicationLogic\Obsidian.Language\Obsidian.Language.csproj">
+      <Project>{71030b59-485e-414c-83dd-bd8f0b2b308e}</Project>
+      <Name>Obsidian.Language</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography.NetStandard\Obsidian.Cryptography.NetStandard.csproj">
       <Project>{e40358ef-ccce-4bd3-8b7d-7c9d8a525a07}</Project>
       <Name>Obsidian.Cryptography.NetStandard</Name>
@@ -384,11 +388,6 @@
       <Project>{1752c00d-5d33-419c-8ec5-0c6f192b4685}</Project>
       <Name>Obsidian.UWP.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="VisualCrypt.Language">
-      <HintPath>..\..\..\..\osm\osm\LanguagePC\Debug\VisualCrypt.Language.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

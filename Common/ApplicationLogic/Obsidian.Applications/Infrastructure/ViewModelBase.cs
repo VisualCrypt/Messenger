@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Obsidian.Applications.Mvvm.Commands;
 using Obsidian.Applications.Services.Interfaces;
-using VisualCrypt.Language.Strings;
+using Obsidian.Language.Strings;
 
 namespace Obsidian.Applications.Infrastructure
 {

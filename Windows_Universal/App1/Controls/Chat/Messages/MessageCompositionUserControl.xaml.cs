@@ -10,7 +10,7 @@ using Obsidian.Applications.ViewModels.Chat;
 
 namespace Obsidian.UWP.Controls.Chat.Messages
 {
-    public sealed partial class CompositionUserControl
+    public sealed partial class CompositionUserControl : ICompositionView
     {
         readonly SendMessagesController _sendMessagesController;
         readonly IPhotoImportService _photoImportService;
@@ -18,10 +18,13 @@ namespace Obsidian.UWP.Controls.Chat.Messages
         public CompositionUserControl()
         {
             InitializeComponent();
+			Hide();
             var container = Application.Current.GetContainer();
             _sendMessagesController = container.Get<SendMessagesController>();
             _photoImportService = container.Get<IPhotoImportService>();
-            Loaded += OnLoaded;
+	        var messagesViewModel = Application.Current.GetContainer().Get<MessagesViewModel>();
+	        messagesViewModel.CompositionView = this;
+			Loaded += OnLoaded;
             if (!App.IsPhone())
             {
                 CompositionBox.AcceptsReturn = false;
@@ -41,7 +44,17 @@ namespace Obsidian.UWP.Controls.Chat.Messages
 
         }
 
-        void TweakEnterKeyBehavior(object sender, KeyRoutedEventArgs e)
+	    public void Hide()
+	    {
+		    this.MainGrid.Visibility = Visibility.Collapsed;
+	    }
+
+	    public void Show()
+	    {
+		    this.MainGrid.Visibility = Visibility.Visible;
+	    }
+
+		void TweakEnterKeyBehavior(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key.Equals(VirtualKey.Enter))
             {

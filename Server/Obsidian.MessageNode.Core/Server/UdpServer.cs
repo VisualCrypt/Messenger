@@ -5,23 +5,26 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Obsidian.Common;
+using Obsidian.Cryptography.Api.Implementations;
+using Obsidian.Cryptography.NetStandard;
+using Obsidian.MessageNode.Core.Controllers;
 
 namespace Obsidian.MessageNode.Core.Server
 {
-    class UdpServer
+    public class UdpServer
     {
         readonly UdpClient _udpClient;
-        readonly IRequestHandler _requestHandler;
+       
         IPEndPoint _ipEndPoint;
 
-        public UdpServer(IRequestHandler serverRequestHandler)
+        public UdpServer()
         {
             _udpClient = new UdpClient(Config.UdpServerPort);
             Log.Info($"Default ReceiveBuffer size is {_udpClient.Client.ReceiveBufferSize}");
             _udpClient.Client.ReceiveBufferSize = Config.UdpReceiveBufferSize;
 
             _ipEndPoint = new IPEndPoint(IPAddress.Any, Config.UdpServerPort);
-            _requestHandler = serverRequestHandler;
+           
         }
 
         public async Task Run(CancellationToken ct)
@@ -31,16 +34,19 @@ namespace Obsidian.MessageNode.Core.Server
             {
                 try
                 {
-	                var packet = await _udpClient.ReceiveAsync();
+	                var udpReceiveResult = await _udpClient.ReceiveAsync();
                     //var packet = _udpClient.Receive(ref _ipEndPoint);
                     stopwatch.Restart();
-                   
-                    var reply = await _requestHandler.ProcessRequestAsync(packet.Buffer);
+	                const string info = "UDPHandler";
+					var vcs = new VisualCrypt2Service();
+					vcs.Init(new Platform_NetStandard(),info);
+					var requestHandler = new ServerRequestHandler(info, vcs);
+                    var reply = await requestHandler.ProcessRequestAsync(udpReceiveResult.Buffer);
                     if (reply == null)
                         continue;
 
-                    await Send(reply);
-                    Log.Info($"UdpServer received {packet.Buffer.Length} bytes, sent {reply?.Length} bytes, {stopwatch.ElapsedMilliseconds}ms, {_ipEndPoint.Address}:{_ipEndPoint.Port}.");
+                    await Send(reply,udpReceiveResult.RemoteEndPoint);
+                    Log.Info($"UdpServer received {udpReceiveResult.Buffer.Length} bytes, sent {reply?.Length} bytes, {stopwatch.ElapsedMilliseconds}ms, {_ipEndPoint.Address}:{_ipEndPoint.Port}.");
                 }
                 catch (Exception e)
                 {
@@ -49,9 +55,9 @@ namespace Obsidian.MessageNode.Core.Server
             }
         }
 
-        async Task Send(byte[] reply)
+        async Task Send(byte[] reply, IPEndPoint remoteEndPoint)
         {
-            int bytesSent = await _udpClient.SendAsync(reply, reply.Length, _ipEndPoint);
+            int bytesSent = await _udpClient.SendAsync(reply, reply.Length, remoteEndPoint);
         }
     }
 }

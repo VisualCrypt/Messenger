@@ -4,7 +4,7 @@ using Obsidian.Applications.Infrastructure;
 using Obsidian.Applications.Models;
 using Obsidian.Applications.Mvvm.Commands;
 using Obsidian.Applications.Services.Interfaces;
-using VisualCrypt.Language.Strings;
+using Obsidian.Language.Strings;
 
 namespace Obsidian.Applications.ViewModels
 {

@@ -88,21 +88,25 @@ namespace Obsidian.Applications.ViewModels.Chat
 
         async Task Send_MessageAsyncNew(Message message, int failCount = 0)
         {
-            message.SendMessageState = SendMessageState.Sending;
-            await _repo.UpdateMessage(message);
-            await _messagesViewModel.UpdateMessageInThreadToSendingState(message);
+	        if (failCount == 0)
+	        {
+				message.SendMessageState = SendMessageState.Sending;
+		        await _repo.UpdateMessage(message);
+		        await _messagesViewModel.UpdateSendMessageState(message);
+			}
+           
             var response = await _chatClient.UploadMessage(message);
             if (response.IsSuccess)
             {
                 var sendAck = response.Result.Split(';');
-                if (sendAck[0] == message.Id && sendAck[1] == message.RecipientId)
+                if (sendAck.Length == 2 && sendAck[0] == message.Id && sendAck[1] == message.RecipientId)
                 {
                     message.SendMessageState = SendMessageState.OnServer;
                     await _repo.UpdateMessage(message);
-                    await _messagesViewModel.UpdateMessageInThreadToOnServerState(message);
+                    await _messagesViewModel.UpdateSendMessageState(message);
                 }
                 else
-                    throw new Exception();
+                    throw new ArgumentException("Received invalid SendAck.",nameof(sendAck));
             }
             else
             {
@@ -110,7 +114,7 @@ namespace Obsidian.Applications.ViewModels.Chat
                 {
                     message.SendMessageState = SendMessageState.ErrorSending;
                     await _repo.UpdateMessage(message);
-                    await _messagesViewModel.UpdateMessageInThreadToErrorSendingState(message);
+                    await _messagesViewModel.UpdateSendMessageState(message);
                     return;
                 }
                 await _chatWorker.TcpConnectAsync();

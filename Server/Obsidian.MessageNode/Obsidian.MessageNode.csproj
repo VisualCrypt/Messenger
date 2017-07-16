@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="web.config.offline" />
+    <Content Include="web.config.bak" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
@@ -29,6 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Obsidian.MessageNode.Core\Obsidian.MessageNode.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

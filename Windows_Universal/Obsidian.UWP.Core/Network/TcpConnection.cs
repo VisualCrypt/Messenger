@@ -86,7 +86,7 @@ namespace Obsidian.UWP.Core.Network
 
             try
             {
-                await sem.WaitAsync();
+                //await sem.WaitAsync(); // this definitely deadlocks sometimes
 
                 if (!IsConnected)
                 {
@@ -97,7 +97,7 @@ namespace Obsidian.UWP.Core.Network
 
                 _dataWriter.WriteBuffer(request.AsBuffer());
                 await _dataWriter.StoreAsync();
-                await _dataWriter.FlushAsync();
+                await _dataWriter.FlushAsync(); // perhaps release the semaphore here and not after await ReceivePackets?
 
                 var bufferSize = 4096;
                 var reader = new TLSEnvelopeReaderBuffer { Buffer = new byte[bufferSize], Payload = null };
@@ -118,7 +118,7 @@ namespace Obsidian.UWP.Core.Network
             }
             finally
             {
-                sem.Release();
+               // sem.Release();
             }
             return response;
         }

@@ -17,12 +17,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Obsidian.Applications.Services.Interfaces;
+using Obsidian.Language.Strings;
 using Obsidian.UWP.Core.Data;
 using Obsidian.UWP.Core.Services;
 using Obsidian.UWP.Pages;
 using Obsidian.UWP.Services;
 using Obsidian.UWP.Styles;
-using VisualCrypt.Language.Strings;
 
 namespace Obsidian.UWP
 {

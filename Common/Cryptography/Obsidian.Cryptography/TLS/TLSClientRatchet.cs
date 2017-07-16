@@ -125,7 +125,7 @@ namespace Obsidian.Cryptography.TLS
                         throw new Exception("Decryption failed in all ways!");
                     decryptResponse = decryptResponse2;
                     Debug.WriteLine("Decryption succeded in Anonymous mode.");
-                    await Reset();
+                    DoReset();
                     isIncomingKeyUnusable = true;
                 }
 
@@ -169,21 +169,27 @@ namespace Obsidian.Cryptography.TLS
 
         public async Task Reset()
         {
-            await _publicMemberLock.WaitAsync();
+            await _publicMemberLock.WaitAsync(); // make sure you don't call this from this class when already in a lock (deadlock)
             try
             {
-                _server.DynamicSecret = null;
-                _server.LatestDynamicPublicKey = null;
-                _server.LatestDynamicPublicKeyId = 0;
-                _server.DynamicPrivateDecryptionKeys.Clear();
-                _server.PushesDone = 0;
+                DoReset();
             }
             finally
             {
-                _publicMemberLock.Release();
+               _publicMemberLock.Release();
             }
-            Debug.WriteLine("Ratchet Reset Done.");
+            
         }
+
+	    void DoReset()
+	    {
+			_server.DynamicSecret = null;
+		    _server.LatestDynamicPublicKey = null;
+		    _server.LatestDynamicPublicKeyId = 0;
+		    _server.DynamicPrivateDecryptionKeys.Clear();
+		    _server.PushesDone = 0;
+		    Debug.WriteLine("Ratchet Reset Done.");
+		}
 
 
         /// <summary>

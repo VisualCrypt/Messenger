@@ -1,0 +1,1 @@
+MainPackage=C:\osmserver\osm\Windows_Universal\App1\bin\x64\Release\Obsidian.UWP.TestClient_1.0.1.0_x64.appx

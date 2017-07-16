@@ -58,8 +58,9 @@ namespace Obsidian.Applications.Workers
                 return;
             _isInitialized = true;
             _settingsManager = _container.Get<AbstractSettingsManager>();
-            //_settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.23";
-            _settingsManager.ChatSettings.RemoteDnsHostAddress = "visualcryptservice.cloudapp.net";
+	        //_settingsManager.ChatSettings.RemoteDnsHostAddress = "127.0.0.1";
+			//_settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.23";
+			_settingsManager.ChatSettings.RemoteDnsHostAddress = "visualcryptservice.cloudapp.net";
 
             _interval = _settingsManager.ChatSettings.Interval;
             _myId = myId;
@@ -320,14 +321,14 @@ namespace Obsidian.Applications.Workers
                     // Try to create a minimal delay between Delivered and Read.
                     if (targetState == SendMessageState.Delivered)
                     {
-                        await _container.Get<MessagesViewModel>().UpdateMessageInThreadReadState(messageToConfirm);
+                        await _container.Get<MessagesViewModel>().UpdateSendMessageState(messageToConfirm);
                         await _repo.UpdateMessage(messageToConfirm);
                     }
                     else
                     {
-                        await Task.Delay(1000);
+                        await Task.Delay(500);
                         await _repo.UpdateMessage(messageToConfirm);
-                        await _container.Get<MessagesViewModel>().UpdateMessageInThreadReadState(messageToConfirm);
+                        await _container.Get<MessagesViewModel>().UpdateSendMessageState(messageToConfirm);
                     }
                 }
             }

@@ -137,6 +137,10 @@
       <Project>{6272b2de-fa0c-40c9-9b61-666370f96b91}</Project>
       <Name>Obsidian.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\ApplicationLogic\Obsidian.Language\Obsidian.Language.csproj">
+      <Project>{71030b59-485e-414c-83dd-bd8f0b2b308e}</Project>
+      <Name>Obsidian.Language</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography.NetStandard\Obsidian.Cryptography.NetStandard.csproj">
       <Project>{e40358ef-ccce-4bd3-8b7d-7c9d8a525a07}</Project>
       <Name>Obsidian.Cryptography.NetStandard</Name>
@@ -145,12 +149,6 @@
       <Project>{769e80db-a46b-473a-962e-4d74c9f9ce12}</Project>
       <Name>Obsidian.Cryptography</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="VisualCrypt.Language, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\osm\osm\LanguagePC\Debug\VisualCrypt.Language.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
