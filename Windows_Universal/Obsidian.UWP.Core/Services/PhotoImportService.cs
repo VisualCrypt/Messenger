@@ -8,6 +8,7 @@ using Windows.Storage.AccessCache;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Obsidian.Applications.Models.Chat;
 using Obsidian.Applications.Services.Interfaces;
@@ -25,13 +26,13 @@ namespace Obsidian.UWP.Core.Services
                 InMemoryRandomAccessStream ras2 = await ConvertTo(photoBytes);
                 var bmi = new BitmapImage();
                 await bmi.SetSourceAsync(ras2);
-                return bmi;
+				return bmi;
             }
             catch (Exception)
             {
                 return null;
             }
-          
+        
             //using (var ms = new MemoryStream(photoBytes))
             //{
             //    var bmi = new BitmapImage();
@@ -46,7 +47,40 @@ namespace Obsidian.UWP.Core.Services
 
         }
 
-        public async Task<string> GetPhotoFutureAccessPath()
+	    public async Task<object> ConvertPhotoBytesToPlatformImageBrush(byte[] photoBytes)
+	    {
+		    try
+		    {
+			    InMemoryRandomAccessStream ras2 = await ConvertTo(photoBytes);
+			    var bmi = new BitmapImage();
+			    await bmi.SetSourceAsync(ras2);
+				var imageBrush = new ImageBrush();
+			    imageBrush.ImageSource = bmi;
+				imageBrush.AlignmentX = AlignmentX.Center;
+			    imageBrush.AlignmentY = AlignmentY.Center;
+				imageBrush.Stretch = Stretch.UniformToFill;
+				return imageBrush;
+		    }
+		    catch (Exception)
+		    {
+			    return null;
+		    }
+
+		    //using (var ms = new MemoryStream(photoBytes))
+		    //{
+		    //    var bmi = new BitmapImage();
+		    //    bmi.DecodePixelHeight = 100;
+		    //    bmi.DecodePixelWidth = 100;
+		    //    var ras = ms.AsRandomAccessStream();
+		    //    ras.Seek(0);
+		    //    if(ras.CanRead)
+		    //        await bmi.SetSourceAsync(ras);
+		    //    return bmi;
+		    //}
+
+	    }
+
+		public async Task<string> GetPhotoFutureAccessPath()
         {
             FileOpenPicker picker = new FileOpenPicker { SuggestedStartLocation = PickerLocationId.PicturesLibrary };
             picker.FileTypeFilter.Add("*");

@@ -58,9 +58,9 @@ namespace Obsidian.Applications.Workers
                 return;
             _isInitialized = true;
             _settingsManager = _container.Get<AbstractSettingsManager>();
-	        //_settingsManager.ChatSettings.RemoteDnsHostAddress = "127.0.0.1";
+	        _settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.38";
 			//_settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.23";
-			_settingsManager.ChatSettings.RemoteDnsHostAddress = "visualcryptservice.cloudapp.net";
+			//_settingsManager.ChatSettings.RemoteDnsHostAddress = "visualcryptservice.cloudapp.net";
 
             _interval = _settingsManager.ChatSettings.Interval;
             _myId = myId;

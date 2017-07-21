@@ -22,11 +22,12 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="/Assets/App/Profile.png" Width="40" Margin="10"/>
+                <Rectangle Margin="10" Width="40" Height="40" Fill="{x:Bind _contactsViewModel.CurrentContact.ContactImageBrush, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"></Rectangle>
+                <!--<Image Grid.Column="0" Source="/Assets/App/Profile.png" Width="40" Margin="10"/>-->
 
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,10,0,0"
                     HorizontalAlignment="Left">
-                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" Margin="0"
+                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" Margin="0" FontWeight="Bold" Foreground="{StaticResource ObsidianMainBrush}"
                                Text="{x:Bind _contactsViewModel.CurrentContact.Name, Mode=OneWay}"/>
                     <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Margin="0"><Run>@</Run><Run Text="{x:Bind _contactsViewModel.CurrentContact.Id, Mode=OneWay}"></Run></TextBlock>
                 </StackPanel>
@@ -43,11 +44,11 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" HorizontalAlignment="Right" Margin="0"
+                    <TextBlock Style="{StaticResource ExtendedAppBarTextBlockStyle}" Foreground="{StaticResource ObsidianWhiteBrush}" HorizontalAlignment="Right" Margin="0"
                                Text="{x:Bind _profileViewModel.Profile.Name, Mode=OneWay}"/>
                     <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Margin="0" HorizontalAlignment="Right"><Run>@</Run><Run Text="{x:Bind _profileViewModel.Profile.Id, Mode=OneWay}"></Run></TextBlock>
                 </StackPanel>
-                <Image Grid.Column="1"  Width="40" Margin="10" Source="{x:Bind _profileViewModel.ProfileImage, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"/>
+                <Image Grid.Column="1"  Width="40" Height="40" Stretch="UniformToFill" Margin="10" Source="{x:Bind _profileViewModel.ProfileImage, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"/>
             </Grid>
         </Grid>
     </Grid>

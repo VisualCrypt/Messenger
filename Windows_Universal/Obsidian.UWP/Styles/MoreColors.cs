@@ -5,12 +5,20 @@ namespace Obsidian.UWP.Styles
 {
 	static class MoreColors
 	{
-		public static SolidColorBrush BackgroundGridDisabledColorBrush => new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x00, 0x00));
+		/*
+			<Color x:Key="Spaceblue">#FF1f4a5c</Color>
+			<Color x:Key="ObsidianDark">#FF438e8b</Color>
+			<Color x:Key="ObsidianMain">#FF34cdca</Color>
+			<Color x:Key="ObsidianWhite">#FFffffff</Color>
+			 
+			 */
 
-		public static SolidColorBrush AccentColorBrush => new SolidColorBrush(Color.FromArgb(0xff, 0x01, 0x16, 0x1e));
-		public static SolidColorBrush AccentColorBrush2 => new SolidColorBrush(Color.FromArgb(0xCC, 0x12, 0x45, 0x56));
-
-		public static SolidColorBrush AccentColorBrush5 => new SolidColorBrush(Color.FromArgb(0xff, 0xef, 0xf6, 0xe0));
+		public static SolidColorBrush ObsidianBlackBrush => new SolidColorBrush(Color.FromArgb(0xff, 0x11, 0x16, 0x1e));
+		public static SolidColorBrush SpaceblueBrush => new SolidColorBrush(Color.FromArgb(0xff, 0x1f, 0x4a, 0x5c));
+		public static SolidColorBrush ObsidianDarkBrush => new SolidColorBrush(Color.FromArgb(0xCC, 0x43, 0x8e, 0x8b));
+		public static SolidColorBrush ObsidianMainBrush => new SolidColorBrush(Color.FromArgb(0xff, 0x34, 0xcd, 0xca));
+		public static SolidColorBrush ObsidianWhiteBrush => new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0xff));
+		public static SolidColorBrush DebugBrush => new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x00, 0xff));
 
 	}
 }

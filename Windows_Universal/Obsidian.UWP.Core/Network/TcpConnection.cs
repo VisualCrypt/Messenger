@@ -34,7 +34,8 @@ namespace Obsidian.UWP.Core.Network
             {
                 _streamSocket = new StreamSocket();
                 _cts = new CancellationTokenSource();
-
+				// https://docs.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamsocketcontrol#Windows_Networking_Sockets_StreamSocketControl_KeepAlive
+				_streamSocket.Control.KeepAlive = true;
                 await _streamSocket.ConnectAsync(new HostName(remoteDnsHost), remotePort.ToString());
                 _dataWriter = new DataWriter(_streamSocket.OutputStream);
 
@@ -94,7 +95,7 @@ namespace Obsidian.UWP.Core.Network
                     _log.Debug("SocketError.OperationAborted");
                     return response;
                 }
-
+				
                 _dataWriter.WriteBuffer(request.AsBuffer());
                 await _dataWriter.StoreAsync();
                 await _dataWriter.FlushAsync(); // perhaps release the semaphore here and not after await ReceivePackets?

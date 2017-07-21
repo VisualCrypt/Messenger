@@ -99,6 +99,11 @@
                         <TransitionCollection/>
                     </chat:EditProfileUserControl.Transitions>
                 </chat:EditProfileUserControl>
+                <chat:EditContactUserControl Grid.Row="0" x:Name="EditContactUserControl" Visibility="Collapsed">
+                    <chat:EditContactUserControl.Transitions>
+                        <TransitionCollection/>
+                    </chat:EditContactUserControl.Transitions>
+                </chat:EditContactUserControl>
                 <!-- CompositionUserControl is the Foreground of the above -->
                 <messages:CompositionUserControl Grid.Row="0" x:Name="CompositionUserControl" />
             </Grid>

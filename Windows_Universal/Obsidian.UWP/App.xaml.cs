@@ -202,20 +202,20 @@ namespace Obsidian.UWP
             // TitleBar Control
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.BackgroundColor = MoreColors.AccentColorBrush.Color;
-            titleBar.InactiveBackgroundColor = MoreColors.AccentColorBrush.Color;
-            titleBar.ButtonBackgroundColor = MoreColors.AccentColorBrush.Color;
-            titleBar.ButtonInactiveBackgroundColor = MoreColors.AccentColorBrush.Color;
+            titleBar.BackgroundColor = MoreColors.ObsidianBlackBrush.Color;
+            titleBar.InactiveBackgroundColor = MoreColors.ObsidianBlackBrush.Color;
+            titleBar.ButtonBackgroundColor = MoreColors.ObsidianBlackBrush.Color;
+            titleBar.ButtonInactiveBackgroundColor = MoreColors.ObsidianBlackBrush.Color;
 
-            titleBar.InactiveForegroundColor = MoreColors.AccentColorBrush5.Color;
-            titleBar.ForegroundColor = MoreColors.AccentColorBrush5.Color;
-            titleBar.ButtonForegroundColor = MoreColors.AccentColorBrush5.Color;
-            titleBar.ButtonHoverForegroundColor = MoreColors.AccentColorBrush5.Color;
-            titleBar.ButtonPressedForegroundColor = MoreColors.AccentColorBrush5.Color;
-            titleBar.ButtonInactiveForegroundColor = MoreColors.AccentColorBrush5.Color;
+            titleBar.InactiveForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
+            titleBar.ForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
+            titleBar.ButtonForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
+            titleBar.ButtonHoverForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
+            titleBar.ButtonPressedForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
+            titleBar.ButtonInactiveForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
 
-            titleBar.ButtonHoverBackgroundColor = MoreColors.AccentColorBrush2.Color;
-            titleBar.ButtonPressedBackgroundColor = MoreColors.AccentColorBrush2.Color;
+            titleBar.ButtonHoverBackgroundColor = MoreColors.ObsidianBlackBrush.Color;
+            titleBar.ButtonPressedBackgroundColor = MoreColors.SpaceblueBrush.Color;
 
 
             if (IsPhone())
@@ -226,8 +226,8 @@ namespace Obsidian.UWP
                 else
                     await statusBar.ShowAsync();
                 //applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-                statusBar.BackgroundColor = MoreColors.AccentColorBrush.Color;
-                statusBar.ForegroundColor = MoreColors.AccentColorBrush5.Color;
+                statusBar.BackgroundColor = MoreColors.SpaceblueBrush.Color;
+                statusBar.ForegroundColor = MoreColors.ObsidianWhiteBrush.Color;
                 statusBar.BackgroundOpacity = 1;
                 statusBar.ProgressIndicator.Text = "thepitext";
                 statusBar.ProgressIndicator.ProgressValue = 0;

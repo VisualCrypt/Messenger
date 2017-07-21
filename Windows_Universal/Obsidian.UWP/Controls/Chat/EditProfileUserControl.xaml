@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <Grid Background="{StaticResource AccentColorBrush}">
+    <Grid Background="{StaticResource ObsidianBlackBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -18,17 +18,17 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" Padding="10">
-                <Image  Source="{x:Bind _profileViewModel.ProfileImage, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"/>
+                <Image HorizontalAlignment="Left" Height="150" Width="150" Margin="10"  Stretch="UniformToFill" Source="{x:Bind _profileViewModel.ProfileImage, Mode=OneWay, Converter={StaticResource BitmapImageFactory}}"/>
             </Border>
             <Border Grid.Column="1"  Padding="10">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="{x:Bind _profileViewModel.Profile.Name, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" Foreground="White" />
-                    <TextBlock Foreground="White">@<Run Foreground="White" Text="{x:Bind _profileViewModel.Profile.Id, Mode=OneWay}"></Run></TextBlock>
+                    <TextBlock Foreground="{StaticResource ObsidianWhiteBrush}">@<Run Foreground="{StaticResource ObsidianWhiteBrush}" Text="{x:Bind _profileViewModel.Profile.Id, Mode=OneWay}"></Run></TextBlock>
                 </StackPanel>
             </Border>
         </Grid>
      <Grid Grid.Row="1">
-         <Button Margin="10" Style="{StaticResource ExtendedAppBarButtonStyle}" Click="ButtonBase_OnClick">Change Image</Button>
+         <Button Margin="10,0" Style="{StaticResource ExtendedAppBarButtonStyle}" Click="ButtonBase_OnClick">Change Profile Image</Button>
      </Grid>
     </Grid>
 </UserControl>

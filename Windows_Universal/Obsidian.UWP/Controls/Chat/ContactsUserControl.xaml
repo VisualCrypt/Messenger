@@ -4,42 +4,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:chat2="using:Obsidian.Applications.Models.Chat"
     xmlns:chat="using:Obsidian.UWP.Controls.Chat"
+    xmlns:chat1="using:Obsidian.Applications.Models.Chat"
+
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
-        <DataTemplate x:Name="ContactListViewTemplate" x:DataType="chat2:Identity">
+        <DataTemplate x:Name="ContactListViewTemplate" x:DataType="chat1:Identity">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+
+
                 <Ellipse x:Name="Ellipse"
-                         Grid.RowSpan="2"
+                      
                          Width ="32"
                          Height="32"
                          Margin="6"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Center"
-                         Fill="LightGray"/>
-                <TextBlock Grid.Column="1"
-                           Grid.Row="0"
-                           Text="{x:Bind Id}" 
-                           x:Phase="1"  
-                           Style="{ThemeResource BaseTextBlockStyle}"
-                           Margin="12,6,0,0"/>
-                <TextBlock  Grid.Column="1"
-                            Grid.Row="1"
-                            Text="{x:Bind Name}" 
-                            x:Phase="2"
-                            Style="{ThemeResource BodyTextBlockStyle}"
-                            Margin="12,0,0,6"/>
+                         Fill="{x:Bind ContactImageBrush, Mode=OneWay, Converter={StaticResource BitmapImageFactory} }"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="{x:Bind Id}" 
+                               x:Phase="1"  
+                               Style="{ThemeResource BaseTextBlockStyle}"
+                               Foreground="{StaticResource ObsidianBlackBrush}"
+                               Margin="12,6,0,0"/>
+                    <TextBlock  Grid.Row="1"
+                                Text="{x:Bind Name, Mode=OneWay}" 
+                                x:Phase="2"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Foreground="{StaticResource SpaceblueBrush}"
+                                Margin="12,0,0,6"/>
+                </Grid>
+
+                <Button Grid.Column="2" x:Name="BtnEditContact" Click="BtnEditContact_OnClick" FontSize="15" Style="{StaticResource ExtendedAppBarButtonStyle}">
+                    <SymbolIcon Symbol="Setting"  />
+                </Button>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -49,7 +59,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <chat:AddContactUserControl Grid.Row="0"  x:Name="AddContactUserControl" x:FieldModifier="public"/>
-        <ListView x:Name="MasterListView" x:FieldModifier="public" Grid.Row="1"
+        <ListView x:Name="MasterListView" x:FieldModifier="public" Grid.Row="1" Background="{StaticResource BlockchainNetBrush}"
                   SelectionMode="Extended"
                   IsItemClickEnabled="True"
                   ShowsScrollingPlaceholders="False"
@@ -59,6 +69,37 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Background" Value="{StaticResource ObsidianLightBrush}"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter
+                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                    SelectionCheckMarkVisualEnabled="True"
+                                    CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                    CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                    DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                    DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                    FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                    FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                    PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                    PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                                    PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                    SelectedBackground="{StaticResource ObsidianDarkBrush}"
+                                    SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                    SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}"
+                                    PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                                    SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                                    DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                    DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                    ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    ContentMargin="{TemplateBinding Padding}"
+                                    CheckMode="Inline"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>

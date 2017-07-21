@@ -109,7 +109,37 @@ namespace Obsidian.Applications.Data
             }
         }
 
-        public async Task<IReadOnlyList<Identity>> GetAllContacts()
+	    public async Task UpdateEncryptedContactImage(string id, byte[] encryptedContactImage)
+	    {
+		    await ProfilesSemaphore.WaitAsync();
+		    try
+		    {
+			    Identity contact = await _contacts.Get(id);
+			    contact.Image = encryptedContactImage;
+			    await _contacts.Update(contact);
+		    }
+		    finally
+		    {
+			    ProfilesSemaphore.Release();
+		    }
+	    }
+
+	    public async Task UpdateContactName(string id, string newName)
+	    {
+		    await ProfilesSemaphore.WaitAsync();
+		    try
+		    {
+			    Identity contact = await _contacts.Get(id);
+			    contact.Name = newName;
+			    await _contacts.Update(contact);
+		    }
+		    finally
+		    {
+			    ProfilesSemaphore.Release();
+		    }
+	    }
+
+		public async Task<IReadOnlyList<Identity>> GetAllContacts()
         {
             await ContactsSemaphore.WaitAsync();
             try

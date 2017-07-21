@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,6 +10,9 @@ namespace Obsidian.UWP.Controls.Chat
 {
     public sealed partial class ContactsUserControl
     {
+		// Will be set from ChatMasterPage
+	    public Action<Identity> EditContactClicked;
+
         readonly ContactsViewModel _contactsViewModel;
 
         public ContactsUserControl()
@@ -50,5 +54,13 @@ namespace Obsidian.UWP.Controls.Chat
             }
             _contactsViewModel.OnViewDidLoad();
         }
+
+	    void BtnEditContact_OnClick(object sender, RoutedEventArgs e)
+	    {
+		    var button = sender as Button;
+		    var identity = button?.DataContext as Identity;
+			if(identity == null) return;
+		    EditContactClicked?.Invoke(identity);
+	    }
     }
 }

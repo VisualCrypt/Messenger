@@ -10,5 +10,7 @@ namespace Obsidian.Applications.Services.Interfaces
         Task<byte[]> GetProfilePhotoBytes();
         Task<byte[]> GetProfilePhotoBytesFromThumbnailImage();
         Task<object> ConvertPhotoBytesToPlatformImage(byte[] photoBytes);
+	    Task<object> ConvertPhotoBytesToPlatformImageBrush(byte[] photoBytes);
+
     }
 }

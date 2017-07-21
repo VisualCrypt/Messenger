@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Obsidian.Applications.Services.Interfaces;
 
@@ -47,9 +48,23 @@ namespace Obsidian.UWP.Core.Services
             return bitmapImage;
         }
 
+	    public async Task<object> LoadLocalImageBrushAsync(string imagePath)
+	    {
+		    var storageFile = await StorageFile.GetFileFromPathAsync(imagePath);
+		    var storageItemThumbnail = await storageFile.GetThumbnailAsync(ThumbnailMode.SingleItem);
+		    var bitmapImage = new BitmapImage();
+		    await bitmapImage.SetSourceAsync(storageItemThumbnail);
+			var imageBrush = new ImageBrush();
+		    imageBrush.ImageSource = bitmapImage;
+		    imageBrush.AlignmentX = AlignmentX.Center;
+		    imageBrush.AlignmentY = AlignmentY.Center;
+		    imageBrush.Stretch = Stretch.UniformToFill;
+			return imageBrush;
+	    }
 
 
 
-      
-    }
+
+
+	}
 }

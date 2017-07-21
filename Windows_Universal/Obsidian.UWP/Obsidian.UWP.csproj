@@ -111,6 +111,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BootstrapperUWP.cs" />
+    <Compile Include="Controls\Chat\EditContactUserControl.xaml.cs">
+      <DependentUpon>EditContactUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Chat\Messages\Bubbles\BubbleBase.cs" />
     <Compile Include="Controls\Chat\Messages\Bubbles\TextAndMediaView.xaml.cs">
       <DependentUpon>TextAndMediaView.xaml</DependentUpon>
@@ -160,6 +163,9 @@
     <Compile Include="Pages\ChatMasterPage.xaml.cs">
       <DependentUpon>ChatMasterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditContactPage.xaml.cs">
+      <DependentUpon>EditContactPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
@@ -181,11 +187,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\App\BlockchainNet.png" />
     <Content Include="Assets\App\EncryptedImage.PNG" />
     <Content Include="Assets\App\NotYetEncryptedImage.PNG" />
+    <Content Include="Assets\App\BG_Sunset.jpg" />
     <Content Include="Assets\App\PlainImagePlaceholder.png" />
     <Content Include="Assets\App\Profile.png" />
-    <Content Include="Assets\App\BG_Sunset.jpg" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -258,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\Chat\EditContactUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Chat\Messages\Bubbles\TextAndMediaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -318,6 +329,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditContactPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\EditProfilePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -344,7 +359,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\VisualCryptColors.xaml">
+    <Page Include="Styles\ObsidianColors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -175,11 +175,12 @@
     <None Include="App1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\App\BG_Sunset.jpg" />
+    <Content Include="Assets\App\BG_Sunset_coarse.jpg" />
     <Content Include="Assets\App\EncryptedImage.PNG" />
     <Content Include="Assets\App\NotYetEncryptedImage.PNG" />
     <Content Include="Assets\App\PlainImagePlaceholder.png" />
     <Content Include="Assets\App\Profile.png" />
+    <Content Include="Assets\App\BG_Sunset.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

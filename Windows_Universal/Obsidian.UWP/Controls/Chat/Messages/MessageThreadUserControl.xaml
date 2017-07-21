@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="15,0,15,0" Foreground="{StaticResource AccentColorBrush}"></ProgressBar>
+        <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="15,0,15,0" Foreground="{StaticResource DebugBrush}"></ProgressBar>
         <ScrollViewer Grid.Row="1" x:Name="ScrollViewer" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="10,0,20,10">
             <ItemsControl x:Name="MessageThread" x:FieldModifier="protected" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" Padding="0,0,0,10"></ItemsControl>

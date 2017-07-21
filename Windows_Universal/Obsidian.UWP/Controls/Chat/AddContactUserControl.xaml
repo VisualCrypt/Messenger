@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 >
-    <Grid Background="{StaticResource AccentColorBrush}">
+    <Grid Background="{StaticResource ObsidianBlackBrush}">
         <Grid.RowDefinitions>
             <!-- The normal AppBar has Height 48, use 38 here -->
             <RowDefinition Height="38" />
@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" x:Name="TextBlockTitle" FontSize="14" Foreground="White"  />
+                <TextBlock VerticalAlignment="Center" x:Name="TextBlockTitle" FontSize="14" Foreground="{StaticResource ObsidianWhiteBrush}"  />
                 <Button Grid.Column="1" x:Name="BtnAddContact" Click="AddContactClick" FontSize="24" Style="{StaticResource ExtendedAppBarButtonStyle}">
                     <SymbolIcon Symbol="AddFriend"  />
                 </Button>
@@ -44,7 +44,7 @@
                 
             </Grid>
         </Border>
-        <StackPanel Grid.Row="1" x:Name="PanelAddContact" HorizontalAlignment="Stretch" Margin="0,0,0,0" Padding="20,0,20,20" BorderBrush="{StaticResource AccentColorBrush2}" BorderThickness="0,0,0,0">
+        <StackPanel Grid.Row="1" x:Name="PanelAddContact" HorizontalAlignment="Stretch" Margin="0,0,0,0" Padding="20,0,20,20" BorderThickness="0,0,0,0">
             <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Text="{x:Bind _contactsViewModel.CurrentError, Mode=OneWay}"></TextBlock>
             <Border Margin="0" Padding="0" Background="White" BorderThickness="0">
                 <TextBox x:Name="TextBoxContactID"
@@ -61,7 +61,7 @@
                                   />
             </Border>
         </StackPanel>
-        <StackPanel Grid.Row="1" x:Name="PanelDeleteContact" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="0,0,0,0" Padding="20,0,20,20" BorderBrush="{StaticResource AccentColorBrush2}" BorderThickness="0,0,0,0">
+        <StackPanel Grid.Row="1" x:Name="PanelDeleteContact" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="0,0,0,0" Padding="20,0,20,20" BorderBrush="{StaticResource SpaceblueBrush}" BorderThickness="0,0,0,0">
             <TextBlock Style="{StaticResource BottomBarTextBlockStyle}" Text="{x:Bind _contactsViewModel.CurrentError, Mode=OneWay}"></TextBlock>
             <Border Margin="0" Padding="0" BorderThickness="0">
                 <TextBlock Text="{x:Bind _contactsViewModel.DeleteList,Mode=OneWay}"

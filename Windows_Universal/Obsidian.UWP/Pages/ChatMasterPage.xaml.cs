@@ -29,6 +29,7 @@ namespace Obsidian.UWP.Pages
             ContactsUserControl.AddContactUserControl.BtnSelectContact.Click += SelectItems;
             ContactsUserControl.AddContactUserControl.BtnCancelAll.Click += CancelSelection;
             ContactsUserControl.AddContactUserControl.BtnConfirmDeleteContact.Click += CancelSelection;
+			ContactsUserControl.
             Loaded += OnLoaded;
         }
 
@@ -50,7 +51,8 @@ namespace Obsidian.UWP.Pages
                 DeleteItem(null, null);
             }
             EditProfileUserControl.Visibility = Visibility.Collapsed;
-            MessagesUserControl.Visibility = Visibility.Visible;
+	        EditContactUserControl.Visibility = Visibility.Collapsed;
+			MessagesUserControl.Visibility = Visibility.Visible;
             CompositionUserControl.Visibility = Visibility.Visible;
             base.OnNavigatedTo(e);
             Debug.WriteLine("Navigated to ChatMasterPage.");
@@ -95,7 +97,8 @@ namespace Obsidian.UWP.Pages
 
             ContactsUserControl.MasterListView.SelectionChanged += OnSelectionChanged;
             ContactsUserControl.MasterListView.ItemClick += OnItemClick;
-          
+	        ContactsUserControl.EditContactClicked = OnEditContactClicked;
+
         }
 
         void VisualStateGroup_PageSize_WideState_Setters()
@@ -149,7 +152,7 @@ namespace Obsidian.UWP.Pages
             if (isNarrow)
             {
                 VisualStateGroup_PageSize_NarrowState_Setters();
-                Frame.Navigate(typeof(ChatSessionPage), new SuppressNavigationTransitionInfo());
+                //Frame.Navigate(typeof(ChatSessionPage), new SuppressNavigationTransitionInfo());
             }
             else
             {
@@ -176,6 +179,7 @@ namespace Obsidian.UWP.Pages
                     MessagesUserControl.Transitions.Clear();
                     MessagesUserControl.Transitions.Add(new EntranceThemeTransition());
                     EditProfileUserControl.Visibility = Visibility.Collapsed;
+	                EditContactUserControl.Visibility = Visibility.Collapsed;
                     MessagesUserControl.Visibility = Visibility.Visible;
                     CompositionUserControl.Visibility = Visibility.Visible;
                 }
@@ -187,6 +191,14 @@ namespace Obsidian.UWP.Pages
                     VisualStateGroup_MasterDetails_ExtendedSelectionState_Setters();
                 }
             }
+	        if (VisualStatesGroup_PageSize.CurrentState == NarrowState)
+	        {
+				if (ContactsUserControl.MasterListView.SelectedItems.Count == 1)
+				{
+					_contactsViewModel.CurrentContact = ContactsUserControl.MasterListView.SelectedItem as Identity;
+					Frame.Navigate(typeof(ChatSessionPage), new DrillInNavigationTransitionInfo());
+				}
+			}
             // Exiting Extended selection
             if (MasterDetailsStatesGroup.CurrentState == ExtendedSelectionState &&
                 ContactsUserControl.MasterListView.SelectedItems.Count == 1)
@@ -214,6 +226,28 @@ namespace Obsidian.UWP.Pages
               
             }
         }
+
+	    void OnEditContactClicked(Identity identity)
+	    {
+			if (VisualStatesGroup_PageSize.CurrentState == NarrowState)
+			{ 
+				Frame.Navigate(typeof(EditContactPage), identity, new DrillInNavigationTransitionInfo());
+			}
+			else
+			{
+				_contactsViewModel.ContactToEdit = identity;
+				EditContactUserControl.Transitions.Clear();
+				EditContactUserControl.Transitions.Add(new EntranceThemeTransition());
+				EditContactUserControl.Visibility = Visibility.Visible;
+				EditContactUserControl.StartEditing();
+
+				ContactsUserControl.MasterListView.SelectedItem = null; // so that we can use onselectionchanged to reset
+				EditProfileUserControl.Visibility = Visibility.Collapsed;
+				MessagesUserControl.Visibility = Visibility.Collapsed;
+				CompositionUserControl.Visibility = Visibility.Collapsed;
+
+			}
+		}
         void IdentityUserControl_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (VisualStatesGroup_PageSize.CurrentState == NarrowState)
@@ -227,6 +261,7 @@ namespace Obsidian.UWP.Pages
                 EditProfileUserControl.Transitions.Add(new EntranceThemeTransition());
                 ContactsUserControl.MasterListView.SelectedItem = null; // so that we can use onselectionchanged to reset
                 EditProfileUserControl.Visibility = Visibility.Visible;
+				EditContactUserControl.Visibility = Visibility.Collapsed;
                 MessagesUserControl.Visibility = Visibility.Collapsed;
                 CompositionUserControl.Visibility = Visibility.Collapsed;
 

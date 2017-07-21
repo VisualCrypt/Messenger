@@ -52,6 +52,7 @@ namespace Obsidian.UWP.Controls.Chat
             BtnDeleteContact.Visibility = Visibility.Collapsed;
             BtnConfirmDeleteContact.Visibility = Visibility.Collapsed;
             PanelAddContact.Visibility = Visibility.Visible;
+	        _contactsViewModel.CurrentError = "";
         }
 
         void DeleteContactClick(object sender, RoutedEventArgs e)

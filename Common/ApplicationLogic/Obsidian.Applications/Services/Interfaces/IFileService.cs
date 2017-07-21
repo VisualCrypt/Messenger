@@ -9,6 +9,8 @@ namespace Obsidian.Applications.Services.Interfaces
         string GetLocalFolderPath();
         string GetInstallLocation();
         Task<object> LoadLocalImageAsync(string imagePath);
-        void SetLocalFolderPathForTests(string localFolderPathOverride);
+	    Task<object> LoadLocalImageBrushAsync(string imagePath);
+
+		void SetLocalFolderPathForTests(string localFolderPathOverride);
     }
 }
