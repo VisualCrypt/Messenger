@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Obsidian.MessageNode.Core.Server
 {
     public static class Log
     {
+		static readonly object Lock = new object();
+		public static readonly List<LogEntry> LogEntries = new List<LogEntry>();
+
         public static event EventHandler<LogEntry> EntryWritten;
         public static void Info(string text)
         {
@@ -26,7 +31,23 @@ namespace Obsidian.MessageNode.Core.Server
             //Trace.TraceError(text);
             Debug.WriteLine(text);
         }
-    }
+
+	    public static  void Log_EntryWritten(object sender, LogEntry e)
+	    {
+		    lock (Lock)
+		    {
+				LogEntries.Add(e);
+			    if (LogEntries.Count > 200)
+				    LogEntries.RemoveAt(200);
+
+			}
+				
+			
+		   
+	    }
+
+
+	}
 
     public class LogEntry
     {

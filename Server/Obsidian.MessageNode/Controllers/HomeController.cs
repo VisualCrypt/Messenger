@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Obsidian.MessageNode.Core.Server;
+using Obsidian.MessageNode.Core.Server.CP;
 
 namespace Obsidian.MessageNode.Controllers
 {
@@ -13,7 +15,22 @@ namespace Obsidian.MessageNode.Controllers
             return View();
         }
 
-        public IActionResult About()
+	    public IActionResult Connections()
+	    {
+		    ViewData["NumConnectedSockets"] = TcpAsyncServer.NumConnectedSockets;
+		    return View();
+	    }
+
+	    public IActionResult Log(string id)
+	    {
+			ViewData["NumConnectedSockets"] = TcpAsyncServer.NumConnectedSockets;
+		    ViewData["Logs"] = Core.Server.Log.LogEntries;
+		    return View();
+	    }
+
+		
+
+		public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 

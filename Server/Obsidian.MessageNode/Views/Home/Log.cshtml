@@ -1,0 +1,14 @@
+﻿@using Obsidian.MessageNode.Core.Server
+@{
+    ViewData["Title"] = "Log";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["NumConnectedSockets"] connected sockets.</h3>
+
+@foreach (var l in ViewData["Logs"] as List<LogEntry>)
+{
+    <p>
+        @l.Text
+    </p>
+}
+

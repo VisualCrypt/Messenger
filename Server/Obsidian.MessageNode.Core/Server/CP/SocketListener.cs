@@ -3,6 +3,12 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
+using Obsidian.Common;
+using Obsidian.Cryptography.Api.Implementations;
+using Obsidian.Cryptography.NetStandard;
+using Obsidian.Cryptography.TLS;
+using Obsidian.MessageNode.Core.Controllers;
 
 namespace Obsidian.MessageNode.Core.Server.CP
 {
@@ -14,10 +20,12 @@ namespace Obsidian.MessageNode.Core.Server.CP
     /// </summary>
     internal sealed class SocketListener
     {
-        /// <summary>
-        /// The socket used to listen for incoming connection requests.
-        /// </summary>
-        private Socket listenSocket;
+	    readonly IRequestHandler _requestHandler;
+
+		/// <summary>
+		/// The socket used to listen for incoming connection requests.
+		/// </summary>
+		private Socket listenSocket;
 
         /// <summary>
         /// Mutex to synchronize server execution.
@@ -69,13 +77,18 @@ namespace Obsidian.MessageNode.Core.Server.CP
             for (Int32 i = 0; i < this.numConnections; i++)
             {
                 SocketAsyncEventArgs readWriteEventArg = new SocketAsyncEventArgs();
+				var reader = new SecureTcpReaderBuffer(null /* null because we don't have a socket yet */);
+	            readWriteEventArg.UserToken = reader;
                 readWriteEventArg.Completed += new EventHandler<SocketAsyncEventArgs>(OnIOCompleted);
-                readWriteEventArg.SetBuffer(new Byte[this.bufferSize], 0, this.bufferSize);
+                readWriteEventArg.SetBuffer(reader.Buffer, 0, this.bufferSize);
 
                 // Add SocketAsyncEventArg to the pool.
                 this.readWritePool.Push(readWriteEventArg);
             }
-        }
+	        var _visualCrypt2Service = new VisualCrypt2Service();
+	        _visualCrypt2Service.Init(new Platform_NetStandard(), "testserver");
+	        _requestHandler = new ServerRequestHandler("testserver", _visualCrypt2Service);
+		}
 
         /// <summary>
         /// Close the socket associated with the client.
@@ -91,7 +104,15 @@ namespace Obsidian.MessageNode.Core.Server.CP
 		//  private void CloseClientSocket(Token token, SocketAsyncEventArgs e)
 		private void CloseClientSocket(SecureTcpReaderBuffer token, SocketAsyncEventArgs e)
         {
-            token.Dispose();
+	        try
+	        {
+		        token.Client.Dispose();
+	        }
+	        catch (Exception ex)
+	        {
+		        Debug.WriteLine(ex);
+	        }
+           
 
             // Decrement the counter keeping track of the total number of clients connected to the server.
             this.semaphoreAcceptedClients.Release();
@@ -140,24 +161,26 @@ namespace Obsidian.MessageNode.Core.Server.CP
         /// <param name="e">SocketAsyncEventArg associated with the completed accept operation.</param>
         private void ProcessAccept(SocketAsyncEventArgs e)
         {
-            Socket s = e.AcceptSocket;
-            if (s.Connected)
+           
+            if (e.AcceptSocket.Connected)
             {
                 try
                 {
-                    SocketAsyncEventArgs readEventArgs = this.readWritePool.Pop();
+                    SocketAsyncEventArgs readEventArgs = this.readWritePool.Pop(); // contains already a SecureTcpReaderBuffer
                     if (readEventArgs != null)
                     {
                         // Get the socket for the accepted client connection and put it into the 
                         // ReadEventArg object user token.
-                        //readEventArgs.UserToken = new Token(s, this.bufferSize);
-						readEventArgs.UserToken = new SecureTcpReaderBuffer(s);
+	                    ((SecureTcpReaderBuffer)readEventArgs.UserToken).Client = e.AcceptSocket;
+						
+                        // readEventArgs.UserToken = new Token(s, this.bufferSize);
+						// readEventArgs.UserToken = new SecureTcpReaderBuffer(s);
 
                         Interlocked.Increment(ref this.numConnectedSockets);
                         Debug.WriteLine("Client connection accepted. There are {0} clients connected to the server",
                             this.numConnectedSockets);
 
-                        if (!s.ReceiveAsync(readEventArgs))
+                        if (!e.AcceptSocket.ReceiveAsync(readEventArgs))
                         {
                             this.ProcessReceive(readEventArgs);
                         }
@@ -169,8 +192,8 @@ namespace Obsidian.MessageNode.Core.Server.CP
                 }
                 catch (SocketException ex)
                 {
-                    Token token = e.UserToken as Token;
-	                Debug.WriteLine("Error when processing data received from {0}:\r\n{1}", token.Connection.RemoteEndPoint, ex.ToString());
+	                SecureTcpReaderBuffer token = e.UserToken as SecureTcpReaderBuffer;
+	                Debug.WriteLine("Error when processing data received from {0}:\r\n{1}", token.Client.RemoteEndPoint, ex);
                 }
                 catch (Exception ex)
                 {
@@ -186,7 +209,7 @@ namespace Obsidian.MessageNode.Core.Server.CP
         {
             // Token token = e.UserToken as Token;
 			SecureTcpReaderBuffer token = e.UserToken as SecureTcpReaderBuffer;
-            IPEndPoint localEp = token.Connection.LocalEndPoint as IPEndPoint;
+            IPEndPoint localEp = token.Client.LocalEndPoint as IPEndPoint;
 
             this.CloseClientSocket(token, e);
 
@@ -199,35 +222,82 @@ namespace Obsidian.MessageNode.Core.Server.CP
         /// If data was received then the data is echoed back to the client.
         /// </summary>
         /// <param name="e">SocketAsyncEventArg associated with the completed receive operation.</param>
-        private void ProcessReceive(SocketAsyncEventArgs e)
+        async void ProcessReceive(SocketAsyncEventArgs e)
         {
-            // Check if the remote host closed the connection.
-            if (e.BytesTransferred > 0)
+	        var stopWatch = new Stopwatch();
+	        stopWatch.Start();
+
+			// Check if the remote host closed the connection.
+			if (e.BytesTransferred > 0)
             {
                 if (e.SocketError == SocketError.Success)
                 {
-                    //Token token = e.UserToken as Token;
-					SecureTcpReaderBuffer token = e.UserToken as SecureTcpReaderBuffer;
-	                
-                    token.SetData(e);
+	                try
+	                {
+						//Token token = e.UserToken as Token;
+						var reader = (SecureTcpReaderBuffer)e.UserToken;
+	              
+	                //var currentBytesRead = reader.Client.Available;
+	                var currentBytesRead = e.BytesTransferred;
 
-                    Socket s = token.Connection;
-                    if (s.Available == 0)
-                    {
-                        // Set return buffer.
-                        token.ProcessData(e);
-                        if (!s.SendAsync(e))
-                        {
-                            // Set the buffer to send back to the client.
-                            this.ProcessSend(e);
-                        }
-                    }
-                    else if (!s.ReceiveAsync(e))
-                    {
-                        // Read the next block of data sent by client.
-                        this.ProcessReceive(e);
-                    }
-                }
+					if (currentBytesRead == 0) // readerBuffer.Payload MUST stay null!
+		                return;
+
+	                TLSEnvelopeExtensions.UpdatePayload(currentBytesRead, reader);
+
+	                do
+	                {
+		                var packet = TLSEnvelopeExtensions.TryTakeOnePacket(ref reader.Payload);
+		                if (packet == null)
+			                break;
+
+		              
+			                var reply = await _requestHandler.ProcessRequestAsync(packet.Serialize());
+		               
+		              
+
+
+		                if (reply != null)
+		                {
+			                e.SetBuffer(reply, 0, reply.Length);
+			                if (!reader.Client.SendAsync(e))
+			                {
+				                // Set the buffer to send back to the client.
+				                this.ProcessSend(e);
+			                }
+							//Send(reader.Client, reply);
+						}
+			              
+		                var sent = reply == null ? "nothing" : $"{reply.Length} bytes";
+		                Log.Info($"TcpServer received {packet.Serialize().Length} bytes, sent {sent}, {stopWatch.ElapsedMilliseconds}ms, {reader.Client.RemoteEndPoint}.");
+	                } while (reader.Payload != null);
+
+					//            reader.Client.BeginReceive(reader.Buffer, 0, SecureTcpReaderBuffer.BufferSize, 0, ReadCallback, reader);
+
+					//if (s.Available == 0) // fertig gelesen
+					//               {
+					//                   // Set return buffer.
+					//                   reader.ProcessData(e);
+					//                   if (!s.SendAsync(e))
+					//                   {
+					//                       // Set the buffer to send back to the client.
+					//                       this.ProcessSend(e);
+					//                   }
+					//               }
+					//               else 
+	                await Task.Delay(5000);
+					if (!reader.Client.ReceiveAsync(e))
+					{
+						// Read the next block of data sent by client.
+						this.ProcessReceive(e);
+					}
+	                }
+	                catch (Exception ex)
+	                {
+						Debug.WriteLine(ex.Message);
+						ProcessError(e);
+	                }
+				}
                 else
                 {
                     this.ProcessError(e);
@@ -253,7 +323,7 @@ namespace Obsidian.MessageNode.Core.Server.CP
                 //Token token = e.UserToken as Token;
 				SecureTcpReaderBuffer token = e.UserToken as SecureTcpReaderBuffer;
 
-                if (!token.Connection.ReceiveAsync(e))
+                if (!token.Client.ReceiveAsync(e))
                 {
                     // Read the next block of data send from the client.
                     this.ProcessReceive(e);
@@ -274,11 +344,12 @@ namespace Obsidian.MessageNode.Core.Server.CP
             // Get host related information.
 	        IPAddress[] addressList = Dns.GetHostAddressesAsync("localhost").Result;
 
-            // Get endpoint for the listener.
-            IPEndPoint localEndPoint = new IPEndPoint(addressList[addressList.Length - 1], port);
+			// Get endpoint for the listener.
+			//IPEndPoint localEndPoint = new IPEndPoint(addressList[addressList.Length - 1], port);
+			IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, port);
 
-            // Create the socket which listens for incoming connections.
-            this.listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+			// Create the socket which listens for incoming connections.
+			this.listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             this.listenSocket.ReceiveBufferSize = this.bufferSize;
             this.listenSocket.SendBufferSize = this.bufferSize;
 

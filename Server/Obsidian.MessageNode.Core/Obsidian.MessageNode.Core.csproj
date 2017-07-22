@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <Compile Remove="Server\SampleServer.cs" />
+    <Compile Remove="Server\SecureTcpReaderBuffer1.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Server\SampleServer.cs" />
+    <None Include="Server\SecureTcpReaderBuffer1.cs" />
   </ItemGroup>
 
   <ItemGroup>

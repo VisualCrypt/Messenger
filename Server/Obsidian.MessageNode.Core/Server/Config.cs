@@ -11,6 +11,7 @@
         public const int TcpServerPort = 55556;
         public const int TcpListenerBacklog = 100;
         public const ushort TcpReaderBufferSize = 4096*2;
+	    public const int TcpMaxConnections = 1000;
 
         public static void Configure()
         {
