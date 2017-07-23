@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Obsidian.Cryptography.NoTLS
 {
@@ -6,20 +7,22 @@ namespace Obsidian.Cryptography.NoTLS
     /// Format Specification for a VisualCrypt TLS datagram.
     /// </summary>
     /// <seealso cref="http://blog.fourthbit.com/2014/12/23/traffic-analysis-of-an-ssl-slash-tls-session"/>
-    public class NOTLSEnvelope
-    {
-        public const int HeaderLength = 58;  // incl. Crc32
+    public class NOTLSEnvelope : IEnvelope
+	{
+        public const int HeaderLength = 10;  // incl. Crc32
         public const byte Version = 0x01;
-        public const byte MessageType = 0x01;
+        public const byte MessageType = 0x02; // TLSEnvelope is version 0x01
         public readonly int TotalLength;
-        public readonly long PrivateKeyHint;
-        public readonly long DynamicPublicKeyId;
-        public readonly byte[] DynamicPublicKey;
-        public readonly byte[] EncipheredPayload;
+     
+        public byte[] EncipheredPayload { get; private set; }
         public readonly int Crc32;
         public int? ActualCrc32;
         public bool? Crc32Success;
 
+		/// <summary>
+		/// For receiving.
+		/// </summary>
+		/// <param name="rawRequest"></param>
         public NOTLSEnvelope(byte[] rawRequest)
         {
             // index 0
@@ -38,27 +41,20 @@ namespace Obsidian.Cryptography.NoTLS
             // index 6, 7, 8, 9, Crc32, calculated on serialization
             Crc32 = BitConverter.ToInt32(rawRequest, 6);
 
-            // index 10, 11, 12, 13, 14, 15, 16, 17
-            PrivateKeyHint = BitConverter.ToInt64(rawRequest, 10);
-
-            // index 18, 19, 20, 21, 22, 23, 24, 25
-            DynamicPublicKeyId = BitConverter.ToInt64(rawRequest, 18);
-
-            // index 26- 57
-            DynamicPublicKey = new byte[32];
-            Buffer.BlockCopy(rawRequest, 26, DynamicPublicKey, 0, 32);
-
-            // index 58 (= HeaderLength) - EOF
+            // index 10 (= HeaderLength) - EOF
             EncipheredPayload = new byte[rawRequest.Length - HeaderLength];
             Buffer.BlockCopy(rawRequest, HeaderLength, EncipheredPayload, 0, EncipheredPayload.Length);
         }
 
-        public NOTLSEnvelope(long privateKeyHint, long dynamicPublicKeyId, byte[] dynamicPublickey, byte[] encipheredPayload)
+		/// <summary>
+		/// For sending.
+		/// </summary>
+		/// <param name="encipheredPayload"></param>
+		/// <param name="length"></param>
+        public NOTLSEnvelope(byte[] encipheredPayload, int length)
         {
-            DynamicPublicKey = dynamicPublickey;
             EncipheredPayload = encipheredPayload;
-            PrivateKeyHint = privateKeyHint;
-            DynamicPublicKeyId = dynamicPublicKeyId;
+			Debug.Assert(length == encipheredPayload.Length);
             TotalLength = HeaderLength + encipheredPayload.Length;
         }
 

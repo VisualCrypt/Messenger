@@ -12,6 +12,7 @@ using Windows.Storage.Streams;
 using Obsidian.Applications.Services.Interfaces;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Infrastructure;
+using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.UWP.Core.Network
@@ -20,12 +21,12 @@ namespace Obsidian.UWP.Core.Network
     {
         readonly AsyncLock _lock = new AsyncLock();
         readonly ILog _log;
-        readonly Response<List<TLSEnvelope>> _successResponse;
+        readonly Response<List<IEnvelope>> _successResponse;
 
         public UdpConnection(Container container)
         {
             _log = container.Get<ILog>();
-            _successResponse = new Response<List<TLSEnvelope>>();
+            _successResponse = new Response<List<IEnvelope>>();
             _successResponse.SetSuccess();
         }
 
@@ -126,7 +127,7 @@ namespace Obsidian.UWP.Core.Network
                 DisconnectPrivate();
         }
 
-        public async Task<Response<List<TLSEnvelope>>> SendRequestAsync(byte[] request)
+        public async Task<Response<List<IEnvelope>>> SendRequestAsync(byte[] request)
         {
             using (await _lock.LockAsync())
             {
@@ -145,7 +146,7 @@ namespace Obsidian.UWP.Core.Network
                 {
                     DisconnectPrivate();
                     _log.Exception(e);
-                    var response = new Response<List<TLSEnvelope>>();
+                    var response = new Response<List<IEnvelope>>();
                     response.SetError(e.Message);
                     return response;
                 }

@@ -23,37 +23,16 @@ namespace Obsidian.Cryptography.NoTLS
             serialized[4] = lenghtBytes[2];
             serialized[5] = lenghtBytes[3];
 
-            byte[] keyHint = BitConverter.GetBytes(tlsEnvelope.PrivateKeyHint);
-            serialized[6 + 4] = keyHint[0];
-            serialized[7 + 4] = keyHint[1];
-            serialized[8 + 4] = keyHint[2];
-            serialized[9 + 4] = keyHint[3];
-            serialized[10 + 4] = keyHint[4];
-            serialized[11 + 4] = keyHint[5];
-            serialized[12 + 4] = keyHint[6];
-            serialized[13 + 4] = keyHint[7];
-
-            byte[] dynamicPublicKeyId = BitConverter.GetBytes(tlsEnvelope.DynamicPublicKeyId);
-            serialized[14 + 4] = dynamicPublicKeyId[0];
-            serialized[15 + 4] = dynamicPublicKeyId[1];
-            serialized[16 + 4] = dynamicPublicKeyId[2];
-            serialized[17 + 4] = dynamicPublicKeyId[3];
-            serialized[18 + 4] = dynamicPublicKeyId[4];
-            serialized[19 + 4] = dynamicPublicKeyId[5];
-            serialized[20 + 4] = dynamicPublicKeyId[6];
-            serialized[21 + 4] = dynamicPublicKeyId[7];
-
-            Buffer.BlockCopy(tlsEnvelope.DynamicPublicKey, 0, serialized, 22 + 4, 32);
+	        var crc32 = Crc32.Compute(serialized);
+	        byte[] crc32Bytes = BitConverter.GetBytes(crc32);
+	        serialized[6] = crc32Bytes[0];
+	        serialized[7] = crc32Bytes[1];
+	        serialized[8] = crc32Bytes[2];
+	        serialized[9] = crc32Bytes[3];
 
             Buffer.BlockCopy(tlsEnvelope.EncipheredPayload, 0, serialized, NOTLSEnvelope.HeaderLength, tlsEnvelope.EncipheredPayload.Length);
 
-            var crc32 = Crc32.Compute(serialized);
-            byte[] crc32Bytes = BitConverter.GetBytes(crc32);
-            serialized[6] = crc32Bytes[0];
-            serialized[7] = crc32Bytes[1];
-            serialized[8] = crc32Bytes[2];
-            serialized[9] = crc32Bytes[3];
-            return serialized;
+			return serialized;
         }
 
 

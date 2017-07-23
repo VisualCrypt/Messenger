@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using Obsidian.Applications.Services.Interfaces;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Infrastructure;
-using Obsidian.Cryptography.Api.Interfaces;
 using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.Applications.Workers
 {
-    public class TLSClient : INetworkClient
+    public class NoTLSClient : INetworkClient
     {
         readonly Container _container;
         readonly IChatClient _chatClient;
@@ -19,9 +18,9 @@ namespace Obsidian.Applications.Workers
         readonly IUdpConnection _udp;
         readonly ILog _log;
         readonly AppState _appState;
-        TLSClientRatchet _r;
+        NOTLSClientRatchet _r;
 
-        public TLSClient(Container container)
+        public NoTLSClient(Container container)
         {
             _container = container;
             _chatClient = container.Get<IChatClient>();
@@ -32,16 +31,13 @@ namespace Obsidian.Applications.Workers
         }
 
         // public for tests only
-        public TLSClientRatchet Ratchet
+        public NOTLSClientRatchet Ratchet
         {
             get
             {
                 if (_r != null)
                     return _r;
-                _r = new TLSClientRatchet(_chatClient.MyId,
-                    _chatClient.MyPrivateKey,
-                    new TLSUser(HardCoded.Server0001, HardCoded.Server0001StaticPublicKey),
-                _container.Get<IVisualCrypt2Service>());
+                _r = new NOTLSClientRatchet();
                 return _r;
             }
         }
@@ -55,7 +51,7 @@ namespace Obsidian.Applications.Workers
                 if (rawRequest == null || rawRequest.Length == 0)
                     throw new Exception("TLSClient received null or empty packet");
 
-                var tlsEnvelope = new TLSEnvelope(rawRequest);
+                var tlsEnvelope = new NOTLSEnvelope(rawRequest);
 
                 int actualCrc32;
                 if (!TLSEnvelopeExtensions.ValidateCrc32(rawRequest, out actualCrc32))
@@ -64,15 +60,17 @@ namespace Obsidian.Applications.Workers
                 var request = await Ratchet.DecryptRequest(tlsEnvelope);
 
 
-                var command = request.ParseCommand();
-                if (!command.CommandID.IsCommandDefined())
+                //var command = request.ParseCommand();
+	            // TODO notls
+	            Command command = new Command(CommandID.Zero, null);
+				if (!command.CommandID.IsCommandDefined())
                     throw new Exception($"TLSClient: The command {command.CommandID} is not defined.");
 
                 await ProcessCommand(command);
             }
             catch (Exception e)
             {
-                var error = $"{nameof(TLSClient)} received bad request via {transport}: {e.Message}";
+                var error = $"{nameof(NoTLSClient)} received bad request via {transport}: {e.Message}";
                 _log.Debug(error);
             }
             return null; // this goes back to the IUdpConnection and is not used there.
@@ -89,7 +87,7 @@ namespace Obsidian.Applications.Workers
                     _appState.SetIsIdentityPublished(false);
                     return;
                 case CommandID.LostDynamicKey_Response:
-                    await Ratchet.Reset();
+					_log.Debug("LostDynamicKey_Response is not applicable in NoTLS mode.");
                     return;
             }
         }
@@ -117,23 +115,22 @@ namespace Obsidian.Applications.Workers
                     }
 
                     var authenticatedResponses = new List<IRequestCommandData>();
-                    foreach (TLSEnvelope tlsEnvelope in networkResponse.Result)
+                    foreach (IEnvelope tlsEnvelope in networkResponse.Result)
                     {
-                        TLSRequest tlsRequest = await Ratchet.DecryptRequest(tlsEnvelope);
+                        NOTLSRequest tlsRequest = await Ratchet.DecryptRequest(tlsEnvelope);
 
                         if (!tlsRequest.IsAuthenticated)
                             throw new Exception("Authentication failed.");
                         _log.Debug($"{tlsRequest.UserId} is authenticated.");
 
-                        Command command = tlsRequest.ParseCommand();
+                        //Command command = tlsRequest.ParseCommand();
+						// TODO notls
+	                    Command command = new Command(CommandID.Zero, null);
                         if (!command.CommandID.IsCommandDefined())
                             throw new Exception($"Invalid Command {command.CommandID}");
 
-                        if (command.CommandID == CommandID.LostDynamicKey_Response)
-                        {
-                            await Ratchet.Reset();
-                        }
-                        else if (command.CommandID == CommandID.NoSuchUser_Response)
+                       
+                        if (command.CommandID == CommandID.NoSuchUser_Response)
                         {
                             _appState.SetIsIdentityPublished(false);
                         }

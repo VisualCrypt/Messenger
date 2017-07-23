@@ -1,9 +1,9 @@
 ﻿namespace Obsidian.Cryptography.NoTLS
 {
-    public class NOTLSRequest
-    {
+    public class NOTLSRequest : IRequestCommandData
+	{
         public string UserId;
-        public byte[] CommandData;
+        public byte[] CommandData { get; set; }
         public bool IsAuthenticated;
     }
 }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Obsidian.Cryptography.NoTLS;
 
 namespace Obsidian.Cryptography.TLS
 {
@@ -13,9 +14,9 @@ namespace Obsidian.Cryptography.TLS
 
     public static class TLSEnvelopeReader
     {
-        public static async Task<List<TLSEnvelope>> ReceivePackets(TLSEnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
+        public static async Task<List<IEnvelope>> ReceivePackets(TLSEnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
         {
-            var receivedPackets = new List<TLSEnvelope>();
+            var receivedPackets = new List<IEnvelope>();
 
             int currentBytesRead;
             TLSEnvelope packet;

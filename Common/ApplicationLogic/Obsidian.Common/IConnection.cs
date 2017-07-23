@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Obsidian.Cryptography.Api.Infrastructure;
-using Obsidian.Cryptography.TLS;
+using Obsidian.Cryptography.NoTLS;
 
 namespace Obsidian.Common
 {
@@ -14,7 +14,7 @@ namespace Obsidian.Common
 
         Task DisconnectAsync();
 
-        Task<Response<List<TLSEnvelope>>> SendRequestAsync(byte[] request);
+        Task<Response<List<IEnvelope>>> SendRequestAsync(byte[] request);
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Obsidian.Cryptography.NoTLS;
 
 namespace Obsidian.Cryptography.TLS
 {
@@ -6,21 +7,24 @@ namespace Obsidian.Cryptography.TLS
     /// Format Specification for a VisualCrypt TLS datagram.
     /// </summary>
     /// <seealso cref="http://blog.fourthbit.com/2014/12/23/traffic-analysis-of-an-ssl-slash-tls-session"/>
-    public class TLSEnvelope
+    public class TLSEnvelope : IEnvelope
     {
         public const int HeaderLength = 58;  // incl. Crc32
-        public const byte Version = 0x01;
-        public const byte MessageType = 0x01;
-        public readonly int TotalLength;
-        public readonly long PrivateKeyHint;
-        public readonly long DynamicPublicKeyId;
-        public readonly byte[] DynamicPublicKey;
-        public readonly byte[] EncipheredPayload;
-        public readonly int Crc32;
-        public int? ActualCrc32;
+		public const byte Version = 0x01;
+	    public const byte MessageType = 0x01;
+		public int TotalLength { get; private set; }
+       
+        public byte[] EncipheredPayload { get; private set; }
+		public  int Crc32 { get; private set; }
+
+		public int? ActualCrc32;
         public bool? Crc32Success;
 
-        public TLSEnvelope(byte[] rawRequest)
+	    public readonly long PrivateKeyHint;
+	    public readonly long DynamicPublicKeyId;
+	    public readonly byte[] DynamicPublicKey;
+
+		public TLSEnvelope(byte[] rawRequest)
         {
             // index 0
             if (rawRequest[0] != Version)

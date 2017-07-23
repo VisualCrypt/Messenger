@@ -6,6 +6,7 @@ using Obsidian.Applications.Models.Chat;
 using Obsidian.Applications.Services.Interfaces;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Infrastructure;
+using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.Applications.Workers
@@ -44,7 +45,7 @@ namespace Obsidian.Applications.Workers
                 var tlsResponse = await _networkClient.SendRequestAsync(requestCommand, Transport.TCP);
                 if (tlsResponse.IsSuccess)
                 {
-                    List<TLSRequest> resp = tlsResponse.Result;
+                    List<IRequestCommandData> resp = tlsResponse.Result;
 
                     List<XMessage> messages = new List<XMessage>();
                     foreach (var authenticableRequest in resp)

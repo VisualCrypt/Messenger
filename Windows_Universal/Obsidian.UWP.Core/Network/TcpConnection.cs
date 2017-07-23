@@ -9,6 +9,7 @@ using Windows.Storage.Streams;
 using Obsidian.Applications.Services.Interfaces;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Infrastructure;
+using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.UWP.Core.Network
@@ -81,9 +82,9 @@ namespace Obsidian.UWP.Core.Network
 
         SemaphoreSlim sem = new SemaphoreSlim(1, 1);
 
-        public async Task<Response<List<TLSEnvelope>>> SendRequestAsync(byte[] request)
+        public async Task<Response<List<IEnvelope>>> SendRequestAsync(byte[] request)
         {
-            var response = new Response<List<TLSEnvelope>>();
+            var response = new Response<List<IEnvelope>>();
 
             try
             {
