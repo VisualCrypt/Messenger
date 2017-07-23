@@ -7,7 +7,7 @@ using System.Threading;
 using Obsidian.Common;
 using Obsidian.Cryptography.TLS;
 
-namespace Obsidian.MessageNode.Core.Server.CP
+namespace Obsidian.MessageNode.Core.Server
 {
 	public class TcpAsyncServer
 	{

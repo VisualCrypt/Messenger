@@ -26,9 +26,11 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Obsidian.MessageNode.Core\Obsidian.MessageNode.Core.csproj" />
+    <ProjectReference Include="..\Obsidian.MessageNode.SqlServer\Obsidian.MessageNode.SqlServer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="web.config">

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Obsidian.MessageNode.Models;
+using Obsidian.MessageNode.SqlServer.Models;
 
 namespace Obsidian.MessageNode
 {
@@ -33,7 +33,7 @@ namespace Obsidian.MessageNode
             services.AddMvc();
 
 			// https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/new-db
-			var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
+			//var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
 
 			services.AddDbContext<InfoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 		}

@@ -7,23 +7,23 @@ namespace Obsidian.MessageNode.Core.Controllers
 {
     public class IdentityController : IIdentityController
     {
-        readonly IServerRepository _serverRepository;
+        readonly IServerRepository _repository;
 
         public IdentityController()
         {
-            _serverRepository = new ServerRepository();
+            _repository = new MemoryRepository();
         }
 
         public async Task<XIdentity> PublishIdentityAsync(XIdentity xIdentity, Action<string, byte[]> initTLSUser)
         {
-            await _serverRepository.AddIdentity(xIdentity);
+            await _repository.AddIdentity(xIdentity);
             initTLSUser(xIdentity.ID, xIdentity.PublicIdentityKey);
             return xIdentity;
         }
 
         public async Task<XIdentity> GetPublishedIdentityAsync(string userId)
         {
-            var identity = await _serverRepository.GetIdentityAsync(userId);
+            var identity = await _repository.GetIdentityAsync(userId);
             return identity;
         }
     }

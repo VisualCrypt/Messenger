@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Obsidian.MessageNode.Core.Server;
-using Obsidian.MessageNode.Core.Server.CP;
 
 namespace Obsidian.MessageNode.Controllers
 {

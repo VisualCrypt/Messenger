@@ -4,12 +4,10 @@ using System.Threading.Tasks;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Implementations;
 using Obsidian.Cryptography.Api.Interfaces;
-using Obsidian.MessageNode.Core.Controllers;
-using Obsidian.MessageNode.Core.Server;
 using Obsidian.Cryptography.NetStandard;
-using Obsidian.MessageNode.Core.Server.CP;
+using Obsidian.MessageNode.Core.Controllers;
 
-namespace Obsidian.MessageNode.Core
+namespace Obsidian.MessageNode.Core.Server
 {
     public static class MessageNode
     {

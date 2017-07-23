@@ -5,16 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Server\SampleServer.cs" />
-    <Compile Remove="Server\SecureTcpReaderBuffer1.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Server\SampleServer.cs" />
-    <None Include="Server\SecureTcpReaderBuffer1.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
   </ItemGroup>
 
@@ -22,6 +12,7 @@
     <ProjectReference Include="..\..\Common\ApplicationLogic\Obsidian.Common\Obsidian.Common.csproj" />
     <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography.NetStandard\Obsidian.Cryptography.NetStandard.csproj" />
     <ProjectReference Include="..\..\Common\Cryptography\Obsidian.Cryptography\Obsidian.Cryptography.csproj" />
+    <ProjectReference Include="..\Obsidian.MessageNode.SqlServer\Obsidian.MessageNode.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

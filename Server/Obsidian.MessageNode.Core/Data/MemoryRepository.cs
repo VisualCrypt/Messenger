@@ -8,7 +8,7 @@ using Obsidian.Cryptography.Api.Infrastructure;
 
 namespace Obsidian.MessageNode.Core.Data
 {
-    class ServerRepository : IServerRepository
+    class MemoryRepository : IServerRepository
     {
         static readonly TimeSpan SimulatedDbDelay = new TimeSpan(0, 0, 0, 0, 1);
 

@@ -3,20 +3,39 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Obsidian.MessageNode.Models;
+using Obsidian.MessageNode.SqlServer.Models;
 
-namespace Obsidian.MessageNode.Migrations
+namespace Obsidian.MessageNode.SqlServer.Migrations
 {
     [DbContext(typeof(InfoContext))]
-    partial class InfoContextModelSnapshot : ModelSnapshot
+    [Migration("20170722190932_Identity Table")]
+    partial class IdentityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Obsidian.MessageNode.Models.MessageInfo", b =>
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.Identity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ContactState");
+
+                    b.Property<DateTime>("LastSeenUTC");
+
+                    b.Property<string>("Name");
+
+                    b.Property<byte[]>("PublicIdentityKey");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Identities");
+                });
+
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.MessageInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -36,7 +55,7 @@ namespace Obsidian.MessageNode.Migrations
                     b.ToTable("MessageInfos");
                 });
 
-            modelBuilder.Entity("Obsidian.MessageNode.Models.UserInfo", b =>
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.UserInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -54,9 +73,9 @@ namespace Obsidian.MessageNode.Migrations
                     b.ToTable("UserInfos");
                 });
 
-            modelBuilder.Entity("Obsidian.MessageNode.Models.MessageInfo", b =>
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.MessageInfo", b =>
                 {
-                    b.HasOne("Obsidian.MessageNode.Models.UserInfo", "UserInfo")
+                    b.HasOne("Obsidian.MessageNode.SqlServer.Models.UserInfo", "UserInfo")
                         .WithMany("MessageInfos")
                         .HasForeignKey("UserInfoId")
                         .OnDelete(DeleteBehavior.Cascade);

@@ -11,7 +11,7 @@ namespace Obsidian.MessageNode.Core.Controllers
 
         public MessageController()
         {
-            _serverRepository = new ServerRepository();
+            _serverRepository = new MemoryRepository();
           
         }
 

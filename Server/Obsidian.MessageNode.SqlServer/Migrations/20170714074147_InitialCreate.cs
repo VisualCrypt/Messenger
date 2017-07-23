@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Obsidian.MessageNode.Migrations
+namespace Obsidian.MessageNode.SqlServer.Migrations
 {
     public partial class InitialCreate : Migration
     {
