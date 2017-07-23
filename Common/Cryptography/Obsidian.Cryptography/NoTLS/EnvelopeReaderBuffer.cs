@@ -6,7 +6,7 @@ using Obsidian.Cryptography.NoTLS;
 
 namespace Obsidian.Cryptography.TLS
 {
-    public class TLSEnvelopeReaderBuffer
+    public class EnvelopeReaderBuffer
     {
         public byte[] Buffer;
         public byte[] Payload;
@@ -14,7 +14,7 @@ namespace Obsidian.Cryptography.TLS
 
     public static class TLSEnvelopeReader
     {
-        public static async Task<List<IEnvelope>> ReceivePackets(TLSEnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
+        public static async Task<List<IEnvelope>> ReceivePackets(EnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
         {
             var receivedPackets = new List<IEnvelope>();
 

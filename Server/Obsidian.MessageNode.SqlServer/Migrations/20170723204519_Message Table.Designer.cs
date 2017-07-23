@@ -8,8 +8,8 @@ using Obsidian.MessageNode.SqlServer.Models;
 namespace Obsidian.MessageNode.SqlServer.Migrations
 {
     [DbContext(typeof(InfoContext))]
-    [Migration("20170722190932_Identity Table")]
-    partial class IdentityTable
+    [Migration("20170723204519_Message Table")]
+    partial class MessageTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,68 +17,61 @@ namespace Obsidian.MessageNode.SqlServer.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.Identity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ContactState");
-
-                    b.Property<DateTime>("LastSeenUTC");
-
-                    b.Property<string>("Name");
-
-                    b.Property<byte[]>("PublicIdentityKey");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Identities");
-                });
-
-            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.MessageInfo", b =>
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MessageId");
+                    b.Property<byte[]>("DynamicPublicKey");
+
+                    b.Property<long>("DynamicPublicKeyId");
+
+                    b.Property<DateTime>("EncryptedDateUtc");
+
+                    b.Property<byte[]>("ImageCipher");
+
+                    b.Property<int>("MessageType");
+
+                    b.Property<long>("PrivateKeyHint");
 
                     b.Property<string>("RecipientId");
 
                     b.Property<string>("SenderId");
 
-                    b.Property<Guid>("UserInfoId");
+                    b.Property<byte[]>("TextCipher");
+
+                    b.Property<string>("UserInfoId");
+
+                    b.Property<string>("XMessageId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserInfoId");
 
-                    b.ToTable("MessageInfos");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.UserInfo", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime>("FirstSeenUTC");
 
-                    b.Property<DateTime>("Modified");
+                    b.Property<DateTime>("LastSeenUTC");
 
                     b.Property<string>("PublicKey");
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.ToTable("UserInfos");
                 });
 
-            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.MessageInfo", b =>
+            modelBuilder.Entity("Obsidian.MessageNode.SqlServer.Models.Message", b =>
                 {
                     b.HasOne("Obsidian.MessageNode.SqlServer.Models.UserInfo", "UserInfo")
                         .WithMany("MessageInfos")
-                        .HasForeignKey("UserInfoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserInfoId");
                 });
         }
     }

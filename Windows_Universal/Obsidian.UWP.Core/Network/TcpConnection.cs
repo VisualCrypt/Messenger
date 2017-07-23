@@ -7,6 +7,7 @@ using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Obsidian.Applications.Services.Interfaces;
+using Obsidian.Applications.Workers;
 using Obsidian.Common;
 using Obsidian.Cryptography.Api.Infrastructure;
 using Obsidian.Cryptography.NoTLS;
@@ -17,9 +18,11 @@ namespace Obsidian.UWP.Core.Network
     public class TcpConnection : ITcpConnection
     {
         readonly ILog _log;
-
+	    readonly Container _container;
+	    bool? _expectTLS;
         public TcpConnection(Container container)
         {
+	        _container = container;
             _log = container.Get<ILog>();
         }
 
@@ -33,7 +36,10 @@ namespace Obsidian.UWP.Core.Network
         {
             try
             {
-                _streamSocket = new StreamSocket();
+				if(_expectTLS == null)
+					_expectTLS = _container.Get<INetworkClient>().GetType() == typeof(TLSClient);
+
+				_streamSocket = new StreamSocket();
                 _cts = new CancellationTokenSource();
 				// https://docs.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamsocketcontrol#Windows_Networking_Sockets_StreamSocketControl_KeepAlive
 				_streamSocket.Control.KeepAlive = true;
@@ -102,12 +108,16 @@ namespace Obsidian.UWP.Core.Network
                 await _dataWriter.FlushAsync(); // perhaps release the semaphore here and not after await ReceivePackets?
 
                 var bufferSize = 4096;
-                var reader = new TLSEnvelopeReaderBuffer { Buffer = new byte[bufferSize], Payload = null };
+                var reader = new EnvelopeReaderBuffer { Buffer = new byte[bufferSize], Payload = null };
 
                 using (var socketStream = new SocketStream(_streamSocket)) // SocketStream is a class I have created
                 {
-                    var receivedPackets = await TLSEnvelopeReader.ReceivePackets(reader,socketStream, _cts.Token);
-                    response.Result = receivedPackets;
+	                List<IEnvelope> receivedPackets;
+					if (_expectTLS == true)
+						receivedPackets = await TLSEnvelopeReader.ReceivePackets(reader,socketStream, _cts.Token);
+					else
+						receivedPackets = await NOTLSEnvelopeReader.ReceivePackets(reader, socketStream, _cts.Token);
+					response.Result = receivedPackets;
                     response.SetSuccess();
                 } // does this something to the underlying socket...? No! Calls Stream.Dispose which calls stream.Close
 

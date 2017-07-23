@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Obsidian.MessageNode.SqlServer.Models
@@ -13,10 +11,10 @@ namespace Obsidian.MessageNode.SqlServer.Models
 		    : base(options)
 	    { }
 		public DbSet<UserInfo> UserInfos { get; set; }
-	    public DbSet<MessageInfo> MessageInfos { get; set; }
-	    public DbSet<Identity> Identities { get; set; }
+	    public DbSet<Message> Messages { get; set; }
+		// public DbSet<MessageInfo> MessageInfos { get; set; }
 
-	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
 		    var conn = "Data Source=tcp:obsidianmessagenodedbserver.database.windows.net,1433;Initial Catalog=ObsidianMessageNode_db;User Id=blackstone@obsidianmessagenodedbserver;Password=!Black:Stone1777";
 
@@ -27,35 +25,45 @@ namespace Obsidian.MessageNode.SqlServer.Models
 
 	public class UserInfo
 	{
-		public Guid Id { get; set; }
-		public string UserId { get; set; }
+		public string Id { get; set; }
 		public string PublicKey { get; set; }
-		public DateTime Created { get; set; }
-		public DateTime Modified { get; set; }
-		public List<MessageInfo> MessageInfos { get; set; }
+		public DateTime FirstSeenUTC { get; set; }
+		public DateTime LastSeenUTC { get; set; }
+		public List<Message> MessageInfos { get; set; }
 	}
-
-	public class MessageInfo
+	public class Message
 	{
 		public Guid Id { get; set; }
-
-		public string MessageId { get; set; }
+		public string XMessageId { get; set; }
 		public string SenderId { get; set; }
 		public string RecipientId { get; set; }
+		public int MessageType { get; set; }
+		public DateTime EncryptedDateUtc { get; set; }
+		public byte[] TextCipher { get; set; }
+		public byte[] ImageCipher { get; set; }
+		public byte[] DynamicPublicKey { get; set; }
+		public long DynamicPublicKeyId { get; set; }
+		public long PrivateKeyHint { get; set; }
 
 		// FK
-		public Guid UserInfoId { get; set; }
+		public string UserInfoId { get; set; }
 		public UserInfo UserInfo { get; set; }
+
 	}
 
-	public class Identity
-	{
-		public string Id { get; set; }
-		public string Name { get; set; }
-		public DateTime LastSeenUTC { get; set; }
-		public DateTime FirstSeenUTC;
-		public byte[] PublicIdentityKey { get; set; }
-		public int ContactState { get; set; }
-	}
+	//public class MessageInfo
+	//{
+	//	public Guid Id { get; set; }
+
+	//	public string MessageId { get; set; }
+	//	public string SenderId { get; set; }
+	//	public string RecipientId { get; set; }
+
+	//	// FK
+	//	public Guid UserInfoId { get; set; }
+	//	public UserInfo UserInfo { get; set; }
+	//}
+
+
 
 }

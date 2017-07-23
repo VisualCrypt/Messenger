@@ -14,20 +14,32 @@ namespace Obsidian.MessageNode.Core.Server
 	    public static readonly CancellationTokenSource CTS = new CancellationTokenSource();
         static IRequestHandler _requestHandler;
 
-	    public static void Run()
+	    public static void RunWithTLS()
 	    {
 		    if(_requestHandler!= null)
 				throw new InvalidOperationException("Already running");
 		    IVisualCrypt2Service visualCrypt2Service = new VisualCrypt2Service();
 		    visualCrypt2Service.Init(new Platform_NetStandard(),nameof(MessageNode));
-		    _requestHandler = new ServerRequestHandler(nameof(MessageNode), visualCrypt2Service);
+		    _requestHandler = new TLSServerRequestHandler(nameof(MessageNode), visualCrypt2Service);
 
 		    var tcpServer = new TcpAsyncServer(_requestHandler);
 		    tcpServer.Run();
 		    Task.Run(() => RunUdpServer(CTS.Token), CTS.Token);
 		}
-	  
-	    static void RunUdpServer(CancellationToken cancellationToken)
+
+	    public static void RunWithoutTLS()
+	    {
+		    if (_requestHandler != null)
+			    throw new InvalidOperationException("Already running");
+		  
+		    _requestHandler = new NoTLSServerRequestHandler(nameof(MessageNode));
+
+		    var tcpServer = new TcpAsyncServer(_requestHandler);
+		    tcpServer.Run();
+		    Task.Run(() => RunUdpServer(CTS.Token), CTS.Token);
+	    }
+
+		static void RunUdpServer(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {

@@ -48,7 +48,18 @@ namespace Obsidian.Cryptography.Api.Infrastructure
             return true;
         }
 
-        public static bool AreBytesEqual(byte[] arr1, byte[] arr2, int startIndex, int length)
+	    public static bool AreAllBytesZero(byte[] arr1)
+	    {
+		    int zeroCount = 0;
+		    for (var i = 0; i < arr1.Length; i++)
+		    {
+			    if (arr1[i] == 0)
+				    zeroCount++;
+		    }
+			return zeroCount == arr1.Length;
+	    }
+
+		public static bool AreBytesEqual(byte[] arr1, byte[] arr2, int startIndex, int length)
         {
             for (var i = startIndex; i < startIndex + length; i++)
             {

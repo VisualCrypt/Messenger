@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Obsidian.Common;
+using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.MessageNode.Core.Server
@@ -108,11 +109,11 @@ namespace Obsidian.MessageNode.Core.Server
 			AsyncUserToken token = (AsyncUserToken)e.UserToken;
 			if (e.BytesTransferred > 0 && e.SocketError == SocketError.Success) 
 			{
-				TLSEnvelopeExtensions.UpdatePayload(e.BytesTransferred, token);
+				NOTLSEnvelopeExtensions.UpdatePayload(e.BytesTransferred, token);
 
 				do
 				{
-					var packet = TLSEnvelopeExtensions.TryTakeOnePacket(ref token.Payload);
+					var packet = NOTLSEnvelopeExtensions.TryTakeOnePacket(ref token.Payload);
 					if (packet == null) // null -> noch nicht komplett
 					{
 						if (!token.Socket.ReceiveAsync(e))
@@ -199,7 +200,7 @@ namespace Obsidian.MessageNode.Core.Server
 	}
 
 
-	class AsyncUserToken : TLSEnvelopeReaderBuffer
+	class AsyncUserToken : EnvelopeReaderBuffer
 	{
 		internal Socket Socket;
 	}

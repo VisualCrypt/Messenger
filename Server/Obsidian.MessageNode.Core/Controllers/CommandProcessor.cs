@@ -46,7 +46,11 @@ namespace Obsidian.MessageNode.Core.Controllers
                     var addedContactId = command.CommandData.DeserializeStringCore();
                     XIdentity identity = await _identityController.GetPublishedIdentityAsync(addedContactId);
                     return new RequestCommand(CommandID.GetIdentity_Response, identity).Serialize(CommandHeader.Yes);
-                default:
+				case CommandID.PublishIdentity:
+					XIdentity identityBeingPublished = command.CommandData.DeserializeXIdentityCore();
+					XIdentity verifiedPublishedIdentity = await _identityController.PublishIdentityAsync(identityBeingPublished, null);
+					return new RequestCommand(CommandID.PublishIdentity_Response, verifiedPublishedIdentity.ID).Serialize(CommandHeader.Yes);
+				default:
                     throw new Exception("Unknown CommandID.");
             }
         }

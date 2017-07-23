@@ -62,7 +62,7 @@ namespace Obsidian.Cryptography.TLS
 
 
 
-        public static void UpdatePayload(int currentBytesRead, TLSEnvelopeReaderBuffer readerBuffer)
+        public static void UpdatePayload(int currentBytesRead, EnvelopeReaderBuffer readerBuffer)
         {
             // read all available Data
             if (readerBuffer.Payload == null) // first read, because readerBuffer.Payload is null

@@ -23,7 +23,7 @@ namespace Obsidian.Applications
             container.RegisterObject<IChatEncryptionService>(new PortableChatEncryptionService(container));
 
             container.RegisterObject<IChatClient>(new ChatClient(container));
-            container.RegisterObject<INetworkClient>(new TLSClient(container));
+            container.RegisterObject<INetworkClient>(new NoTLSClient(container));
             container.RegisterObject<ChatWorker>(new ChatWorker(container));
             container.RegisterObject<ProfileViewModel>(new ProfileViewModel(container));
 

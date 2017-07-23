@@ -8,7 +8,7 @@ namespace Obsidian.MessageNode
         public static void Main(string[] args)
         {
 	        Core.Server.Log.EntryWritten += Core.Server.Log.Log_EntryWritten;
-			Core.Server.MessageNode.Run();
+			Core.Server.MessageNode.RunWithoutTLS();
 
 			var host = new WebHostBuilder()
                 .UseKestrel()

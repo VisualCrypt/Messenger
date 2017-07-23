@@ -5,3 +5,6 @@ uses the appsetting.Production.json connectionstring. Be sure not to check this 
 
 dotnet ef migrations add "Identity Table" --startup-project ../Obsidian.MessageNode\Obsidian.MessageNode.csproj
 
+
+dotnet ef database drop --startup-project ../Obsidian.MessageNode\Obsidian.MessageNode.csproj
+

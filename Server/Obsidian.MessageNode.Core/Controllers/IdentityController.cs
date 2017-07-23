@@ -11,13 +11,14 @@ namespace Obsidian.MessageNode.Core.Controllers
 
         public IdentityController()
         {
-            _repository = new MemoryRepository();
+            _repository = new SqlRepository();
         }
 
         public async Task<XIdentity> PublishIdentityAsync(XIdentity xIdentity, Action<string, byte[]> initTLSUser)
         {
             await _repository.AddIdentity(xIdentity);
-            initTLSUser(xIdentity.ID, xIdentity.PublicIdentityKey);
+			if(initTLSUser != null) // TLS
+				initTLSUser(xIdentity.ID, xIdentity.PublicIdentityKey);
             return xIdentity;
         }
 

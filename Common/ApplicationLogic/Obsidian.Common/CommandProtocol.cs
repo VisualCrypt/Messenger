@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Obsidian.Cryptography.NoTLS;
 using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.Common
@@ -53,7 +54,7 @@ namespace Obsidian.Common
                
             throw new NotSupportedException($"Serialization of {value.GetType()} is not supported.");
         }
-        public static Command ParseCommand(this TLSRequest tlsRequest)
+        public static Command ParseCommand(this IRequestCommandData tlsRequest)
         {
             var announcedLenght = BitConverter.ToInt32(tlsRequest.CommandData, 1);
             if (announcedLenght != tlsRequest.CommandData.Length)

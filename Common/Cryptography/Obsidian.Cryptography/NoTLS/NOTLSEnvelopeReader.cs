@@ -2,14 +2,15 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Obsidian.Cryptography.TLS;
 
 namespace Obsidian.Cryptography.NoTLS
 {
 	public static class NOTLSEnvelopeReader
 	{
-		public static async Task<List<NOTLSEnvelope>> ReceivePackets(NOTLSEnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
+		public static async Task<List<IEnvelope>> ReceivePackets(EnvelopeReaderBuffer readerBuffer, Stream stream, CancellationToken ct)
 		{
-			var receivedPackets = new List<NOTLSEnvelope>();
+			var receivedPackets = new List<IEnvelope>();
 
 			int currentBytesRead;
 			NOTLSEnvelope packet;

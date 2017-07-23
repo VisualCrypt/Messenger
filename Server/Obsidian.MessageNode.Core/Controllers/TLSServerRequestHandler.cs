@@ -7,14 +7,14 @@ using Obsidian.MessageNode.Core.Server;
 
 namespace Obsidian.MessageNode.Core.Controllers
 {
-    public class ServerRequestHandler : IRequestHandler
+    public class TLSServerRequestHandler : IRequestHandler
     {
         readonly CommandProcessor _commandProcessor;
         readonly TLSServerRatchet _ratchet;
 
-        public ServerRequestHandler(string serverId, IVisualCrypt2Service visualCrypt2Service)
+        public TLSServerRequestHandler(string serverId, IVisualCrypt2Service visualCrypt2Service)
         {
-            _commandProcessor = new CommandProcessor();
+            _commandProcessor = new CommandProcessor(); 
             _ratchet = new TLSServerRatchet(serverId, ServerKeyRepository.ServerPrivateKey, visualCrypt2Service);
         }
 
@@ -28,7 +28,7 @@ namespace Obsidian.MessageNode.Core.Controllers
 
             if (request == null)
             {
-                Log.Warn($"ServerRequestHandler: Unknown DynamicPublicKey {tlsEnvelope.DynamicPublicKeyId}, sending {CommandID.LostDynamicKey_Response}.");
+                Log.Warn($"TLSServerRequestHandler: Unknown DynamicPublicKey {tlsEnvelope.DynamicPublicKeyId}, sending {CommandID.LostDynamicKey_Response}.");
                 // request == null means we lost the dynamic private key to to the public key the client used.
                 // We don't know who the client is, because TLS could not decrypt the message at all.
                 // We now need to tell the client it needs to reset its key schedule, i.e. start over

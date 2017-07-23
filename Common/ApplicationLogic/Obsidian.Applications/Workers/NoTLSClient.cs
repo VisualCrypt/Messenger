@@ -54,15 +54,14 @@ namespace Obsidian.Applications.Workers
                 var tlsEnvelope = new NOTLSEnvelope(rawRequest);
 
                 int actualCrc32;
-                if (!TLSEnvelopeExtensions.ValidateCrc32(rawRequest, out actualCrc32))
+                if (!NOTLSEnvelopeExtensions.ValidateCrc32(rawRequest, out actualCrc32))
                     throw new Exception($"TLSEnvelope CRC32 Error: Expected: {tlsEnvelope.Crc32}, actual: {actualCrc32}");
 
                 var request = await Ratchet.DecryptRequest(tlsEnvelope);
 
 
-                //var command = request.ParseCommand();
-	            // TODO notls
-	            Command command = new Command(CommandID.Zero, null);
+                var command = request.ParseCommand();
+	          
 				if (!command.CommandID.IsCommandDefined())
                     throw new Exception($"TLSClient: The command {command.CommandID} is not defined.");
 
@@ -119,13 +118,11 @@ namespace Obsidian.Applications.Workers
                     {
                         NOTLSRequest tlsRequest = await Ratchet.DecryptRequest(tlsEnvelope);
 
-                        if (!tlsRequest.IsAuthenticated)
-                            throw new Exception("Authentication failed.");
-                        _log.Debug($"{tlsRequest.UserId} is authenticated.");
+                       Debug.Assert(tlsRequest.IsAuthenticated == false);
+                     
 
-                        //Command command = tlsRequest.ParseCommand();
-						// TODO notls
-	                    Command command = new Command(CommandID.Zero, null);
+                        Command command = tlsRequest.ParseCommand();
+						
                         if (!command.CommandID.IsCommandDefined())
                             throw new Exception($"Invalid Command {command.CommandID}");
 

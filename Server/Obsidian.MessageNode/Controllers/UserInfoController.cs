@@ -25,7 +25,7 @@ namespace Obsidian.MessageNode.Controllers
         }
 
         // GET: UserInfo/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -53,11 +53,11 @@ namespace Obsidian.MessageNode.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,PublicKey,Created,Modified")] UserInfo userInfo)
+        public async Task<IActionResult> Create([Bind("Id,PublicKey")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
-                userInfo.Id = Guid.NewGuid();
+	            userInfo.FirstSeenUTC = DateTime.UtcNow;
                 _context.Add(userInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -66,7 +66,7 @@ namespace Obsidian.MessageNode.Controllers
         }
 
         // GET: UserInfo/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Obsidian.MessageNode.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,UserId,PublicKey,Created,Modified")] UserInfo userInfo)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,PublicKey")] UserInfo userInfo)
         {
             if (id != userInfo.Id)
             {
@@ -117,7 +117,7 @@ namespace Obsidian.MessageNode.Controllers
         }
 
         // GET: UserInfo/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Obsidian.MessageNode.Controllers
         // POST: UserInfo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var userInfo = await _context.UserInfos.SingleOrDefaultAsync(m => m.Id == id);
             _context.UserInfos.Remove(userInfo);
@@ -145,7 +145,7 @@ namespace Obsidian.MessageNode.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool UserInfoExists(Guid id)
+        private bool UserInfoExists(string id)
         {
             return _context.UserInfos.Any(e => e.Id == id);
         }

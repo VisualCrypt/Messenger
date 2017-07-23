@@ -11,7 +11,7 @@ namespace Obsidian.Cryptography.NoTLS
             if (tlsEnvelope.TotalLength != NOTLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length)
                 throw new InvalidOperationException("Actual payload lenght does not match Length field.");
 
-            int serializedLength = TLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length;
+            int serializedLength = NOTLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length;
             var serialized = new byte[serializedLength];
 
             serialized[0] = NOTLSEnvelope.Version;
@@ -23,14 +23,14 @@ namespace Obsidian.Cryptography.NoTLS
             serialized[4] = lenghtBytes[2];
             serialized[5] = lenghtBytes[3];
 
+            Buffer.BlockCopy(tlsEnvelope.EncipheredPayload, 0, serialized, NOTLSEnvelope.HeaderLength, tlsEnvelope.EncipheredPayload.Length);
+
 	        var crc32 = Crc32.Compute(serialized);
 	        byte[] crc32Bytes = BitConverter.GetBytes(crc32);
 	        serialized[6] = crc32Bytes[0];
 	        serialized[7] = crc32Bytes[1];
 	        serialized[8] = crc32Bytes[2];
 	        serialized[9] = crc32Bytes[3];
-
-            Buffer.BlockCopy(tlsEnvelope.EncipheredPayload, 0, serialized, NOTLSEnvelope.HeaderLength, tlsEnvelope.EncipheredPayload.Length);
 
 			return serialized;
         }
@@ -42,7 +42,7 @@ namespace Obsidian.Cryptography.NoTLS
 
 
 
-        public static void UpdatePayload(int currentBytesRead, NOTLSEnvelopeReaderBuffer readerBuffer)
+        public static void UpdatePayload(int currentBytesRead, EnvelopeReaderBuffer readerBuffer)
         {
             // read all available Data
             if (readerBuffer.Payload == null) // first read, because readerBuffer.Payload is null
