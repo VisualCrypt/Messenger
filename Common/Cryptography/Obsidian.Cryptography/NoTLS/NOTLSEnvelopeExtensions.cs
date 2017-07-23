@@ -3,18 +3,18 @@ using Obsidian.Cryptography.Api.Infrastructure;
 
 namespace Obsidian.Cryptography.TLS
 {
-    public static class TLSEnvelopeExtensions
+    public static class NOTLSEnvelopeExtensions
     {
-        public static byte[] Serialize(this TLSEnvelope tlsEnvelope)
+        public static byte[] Serialize(this NOTLSEnvelope tlsEnvelope)
         {
-            if (tlsEnvelope.TotalLength != TLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length)
+            if (tlsEnvelope.TotalLength != NOTLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length)
                 throw new InvalidOperationException("Actual payload lenght does not match Length field.");
 
             int serializedLength = TLSEnvelope.HeaderLength + tlsEnvelope.EncipheredPayload.Length;
             var serialized = new byte[serializedLength];
 
-            serialized[0] = TLSEnvelope.Version;
-            serialized[1] = TLSEnvelope.MessageType;
+            serialized[0] = NOTLSEnvelope.Version;
+            serialized[1] = NOTLSEnvelope.MessageType;
 
             byte[] lenghtBytes = BitConverter.GetBytes(serializedLength);
             serialized[2] = lenghtBytes[0];
@@ -44,7 +44,7 @@ namespace Obsidian.Cryptography.TLS
 
             Buffer.BlockCopy(tlsEnvelope.DynamicPublicKey, 0, serialized, 22 + 4, 32);
 
-            Buffer.BlockCopy(tlsEnvelope.EncipheredPayload, 0, serialized, TLSEnvelope.HeaderLength, tlsEnvelope.EncipheredPayload.Length);
+            Buffer.BlockCopy(tlsEnvelope.EncipheredPayload, 0, serialized, NOTLSEnvelope.HeaderLength, tlsEnvelope.EncipheredPayload.Length);
 
             var crc32 = Crc32.Compute(serialized);
             byte[] crc32Bytes = BitConverter.GetBytes(crc32);
@@ -62,7 +62,7 @@ namespace Obsidian.Cryptography.TLS
 
 
 
-        public static void UpdatePayload(int currentBytesRead, TLSEnvelopeReaderBuffer readerBuffer)
+        public static void UpdatePayload(int currentBytesRead, NOTLSEnvelopeReaderBuffer readerBuffer)
         {
             // read all available Data
             if (readerBuffer.Payload == null) // first read, because readerBuffer.Payload is null
@@ -81,9 +81,9 @@ namespace Obsidian.Cryptography.TLS
         }
 
 
-        public static TLSEnvelope TryTakeOnePacket(ref byte[] readerPayload)
+        public static NOTLSEnvelope TryTakeOnePacket(ref byte[] readerPayload)
         {
-            if (readerPayload.Length < TLSEnvelope.HeaderLength)
+            if (readerPayload.Length < NOTLSEnvelope.HeaderLength)
                 return null;
 
             var advertisedLength = ExtractLenght(readerPayload);
@@ -108,7 +108,7 @@ namespace Obsidian.Cryptography.TLS
                 Buffer.BlockCopy(readerPayload, advertisedLength, modifiedReaderPayLoad, 0, modifiedReaderPayLoad.Length);
                 readerPayload = modifiedReaderPayLoad;
             }
-            return new TLSEnvelope(tlsPacket) { ActualCrc32 = actualCrc32, Crc32Success = crc32Success };
+            return new NOTLSEnvelope(tlsPacket) { ActualCrc32 = actualCrc32, Crc32Success = crc32Success };
         }
 
         static int ExtractLenght(byte[] rawRequest)
