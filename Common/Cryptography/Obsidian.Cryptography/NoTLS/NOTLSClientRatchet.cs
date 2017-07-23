@@ -11,8 +11,9 @@ using Obsidian.Cryptography.Api.Infrastructure;
 using Obsidian.Cryptography.Api.Interfaces;
 using Obsidian.Cryptography.E2E;
 using Obsidian.Cryptography.ECC;
+using Obsidian.Cryptography.TLS;
 
-namespace Obsidian.Cryptography.TLS
+namespace Obsidian.Cryptography.NoTLS
 {
     public class NOTLSClientRatchet
     {

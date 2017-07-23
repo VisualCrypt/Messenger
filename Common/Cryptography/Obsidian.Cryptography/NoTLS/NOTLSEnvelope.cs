@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Obsidian.Cryptography.TLS
+namespace Obsidian.Cryptography.NoTLS
 {
     /// <summary>
     /// Format Specification for a VisualCrypt TLS datagram.

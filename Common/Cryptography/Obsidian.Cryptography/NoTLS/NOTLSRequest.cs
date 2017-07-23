@@ -1,4 +1,4 @@
-﻿namespace Obsidian.Cryptography.TLS
+﻿namespace Obsidian.Cryptography.NoTLS
 {
     public class NOTLSRequest
     {
