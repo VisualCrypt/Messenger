@@ -35,7 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obsidian.UWP.TestClient", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obsidian.Language", "Common\ApplicationLogic\Obsidian.Language\Obsidian.Language.csproj", "{71030B59-485E-414C-83DD-BD8F0B2B308E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obsidian.MessageNode.SqlServer", "Server\Obsidian.MessageNode.SqlServer\Obsidian.MessageNode.SqlServer.csproj", "{F113C801-6CDE-4527-B4DF-618F347033F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obsidian.MessageNode.SqlServer", "Server\Obsidian.MessageNode.SqlServer\Obsidian.MessageNode.SqlServer.csproj", "{F113C801-6CDE-4527-B4DF-618F347033F9}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureCloudService1", "AzureCloudService1\AzureCloudService1.ccproj", "{F4A8849F-B499-4DA1-9844-8F052FBA2A60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRole1", "WorkerRole1\WorkerRole1.csproj", "{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,6 +253,38 @@ Global
 		{F113C801-6CDE-4527-B4DF-618F347033F9}.Release|x64.Build.0 = Release|Any CPU
 		{F113C801-6CDE-4527-B4DF-618F347033F9}.Release|x86.ActiveCfg = Release|Any CPU
 		{F113C801-6CDE-4527-B4DF-618F347033F9}.Release|x86.Build.0 = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|ARM.Build.0 = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|x64.Build.0 = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4A8849F-B499-4DA1-9844-8F052FBA2A60}.Release|x86.Build.0 = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|ARM.Build.0 = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|x64.Build.0 = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Debug|x86.Build.0 = Debug|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|ARM.Build.0 = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|x64.ActiveCfg = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|x64.Build.0 = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{238DFA7E-12C6-477A-BE75-ACC2F2F350CE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

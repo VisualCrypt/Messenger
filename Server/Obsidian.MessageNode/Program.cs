@@ -12,10 +12,11 @@ namespace Obsidian.MessageNode
 
 			var host = new WebHostBuilder()
                 .UseKestrel()
+				.UseUrls("http://*:5000/")
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+               // .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
+                //.UseApplicationInsights()
                 .Build();
 	        host.Run();
 
