@@ -61,7 +61,7 @@ namespace Obsidian.Applications.Workers
 	        //_settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.38"; // localhost via internal network address
 			//_settingsManager.ChatSettings.RemoteDnsHostAddress = "192.168.178.23";
 			//_settingsManager.ChatSettings.RemoteDnsHostAddress = "visualcryptservice.cloudapp.net";
-	        _settingsManager.ChatSettings.RemoteDnsHostAddress = "13.95.153.230";
+	        _settingsManager.ChatSettings.RemoteDnsHostAddress = "obsidianseednode1.westeurope.cloudapp.azure.com";
 
 			_interval = _settingsManager.ChatSettings.Interval;
             _myId = myId;
