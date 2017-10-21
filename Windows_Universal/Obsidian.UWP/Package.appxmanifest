@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="ObsidianPlatform.ObsidianMessenger" Publisher="CN=Obsidian Platform" Version="1.1.14.0" />
+  <Identity Name="ObsidianPlatform.ObsidianMessenger" Publisher="CN=Obsidian Platform" Version="1.1.15.0" />
   <mp:PhoneIdentity PhoneProductId="91586345-c948-45b5-80a4-3aff58d29eaa" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Obsidian Messenger</DisplayName>
@@ -24,24 +24,13 @@
         <uap:SplashScreen Image="Assets\Splash_620_300.png" BackgroundColor="#12272F" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="odn">
-            <uap:DisplayName>Obsidian</uap:DisplayName>
+        <uap:Extension Category="windows.shareTarget">
+          <uap:ShareTarget>
             <uap:SupportedFileTypes>
-              <uap:FileType ContentType="text/plain">.odn</uap:FileType>
-              <uap:FileType ContentType="text/plain">.txt</uap:FileType>
-              <uap:FileType ContentType="text/plain">.md</uap:FileType>
+              <uap:SupportsAnyFileType />
             </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileSavePicker">
-          <uap:FileSavePicker>
-            <uap:SupportedFileTypes>
-              <uap:FileType>.visualcrypt</uap:FileType>
-              <uap:FileType>.txt</uap:FileType>
-              <uap:FileType>.md</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileSavePicker>
+            <uap:DataFormat>Text</uap:DataFormat>
+          </uap:ShareTarget>
         </uap:Extension>
         <uap:Extension Category="windows.fileOpenPicker">
           <uap:FileOpenPicker>
@@ -52,13 +41,24 @@
             </uap:SupportedFileTypes>
           </uap:FileOpenPicker>
         </uap:Extension>
-        <uap:Extension Category="windows.shareTarget">
-          <uap:ShareTarget>
+        <uap:Extension Category="windows.fileSavePicker">
+          <uap:FileSavePicker>
             <uap:SupportedFileTypes>
-              <uap:SupportsAnyFileType />
+              <uap:FileType>.visualcrypt</uap:FileType>
+              <uap:FileType>.txt</uap:FileType>
+              <uap:FileType>.md</uap:FileType>
             </uap:SupportedFileTypes>
-            <uap:DataFormat>Text</uap:DataFormat>
-          </uap:ShareTarget>
+          </uap:FileSavePicker>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="odn">
+            <uap:DisplayName>Obsidian</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="text/plain">.odn</uap:FileType>
+              <uap:FileType ContentType="text/plain">.txt</uap:FileType>
+              <uap:FileType ContentType="text/plain">.md</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
         </uap:Extension>
       </Extensions>
     </Application>
