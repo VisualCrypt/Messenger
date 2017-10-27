@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="53" id="cxk-wN-pdQ" customClass="ContactCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="cxk-wN-pdQ" id="YTl-1W-gDM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="52.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="UserUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="cFW-Nf-BkF">
+                        <rect key="frame" x="8" y="3" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="796-pd-KOT"/>
+                            <constraint firstAttribute="width" secondItem="cFW-Nf-BkF" secondAttribute="height" multiplier="1:1" id="8Fk-dB-61P"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epf-fD-UVn">
+                        <rect key="frame" x="56" y="3" width="256" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epB-7s-n3k">
+                        <rect key="frame" x="56" y="27" width="256" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="epf-fD-UVn" firstAttribute="leading" secondItem="cFW-Nf-BkF" secondAttribute="trailing" constant="8" id="1C8-Z6-BQX"/>
+                    <constraint firstItem="epB-7s-n3k" firstAttribute="leading" secondItem="cFW-Nf-BkF" secondAttribute="trailing" constant="8" id="FGC-KH-Jv6"/>
+                    <constraint firstItem="cFW-Nf-BkF" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="8" id="Fv4-Ne-sv8"/>
+                    <constraint firstAttribute="trailing" secondItem="epB-7s-n3k" secondAttribute="trailing" constant="8" id="Gb8-r9-hMD"/>
+                    <constraint firstAttribute="trailing" secondItem="epf-fD-UVn" secondAttribute="trailing" constant="8" id="HWM-lT-dM8"/>
+                    <constraint firstItem="cFW-Nf-BkF" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="4" id="RPb-gO-p2Q"/>
+                    <constraint firstItem="epf-fD-UVn" firstAttribute="top" secondItem="cFW-Nf-BkF" secondAttribute="top" id="WZM-g0-AOy"/>
+                    <constraint firstItem="epB-7s-n3k" firstAttribute="bottom" secondItem="cFW-Nf-BkF" secondAttribute="bottom" id="YwQ-OX-m3G"/>
+                    <constraint firstAttribute="bottom" secondItem="cFW-Nf-BkF" secondAttribute="bottom" constant="4" id="eWF-EV-tFl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ProfileImage" destination="cFW-Nf-BkF" id="4ly-GO-Ii7"/>
+                <outlet property="ProfileName" destination="epf-fD-UVn" id="ZKK-6v-zhh"/>
+                <outlet property="Status" destination="epB-7s-n3k" id="Xpa-QN-rId"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="5.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="UserUnselected" width="32" height="32"/>
+    </resources>
+</document>

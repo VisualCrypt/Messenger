@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="primary">#2196F3</color>
+	<color name="primary_dark">#34CDCA</color>
+	<color name="primary_light">#BBDEFB</color>
+    <color name="accent">#34CDCA</color>
+    <color name="toolbar_title">#FFFFFF</color>
+	<color name="toolbar_backarrow_and_menu">#FFFFFF</color>
+    <!--Toolbar-->
+    <color name="toolbar_elevation">#60676d</color>
+    <color name="toolbar_popupmenu_background">#FFFFFF</color>
+    <color name="toolbar_popupmenu_text">#000000</color>
+    <!--Common-->
+	<color name="divider">#60676d</color>
+	<!--Chat-->
+    <color name="chat_backrground">#D6F1F1</color>
+    <color name="chat_lastvisit">#80FFFFFF</color>
+	<color name="chat_messagebubblecolor_currentuser">#EFFFDE</color>
+	<color name="chat_messagebubblecolor_interlocutor">#FFFFFF</color>
+    <color name="chat_messagebubble_link">#00f2ff</color>
+    <color name="chat_emojikeyboard_tabicon_selected">#1976D2</color>
+    <color name="chat_emojikeyboard_tabicon_not_selected">#757575</color>
+	<!--Chat info-->
+	<color name="chatinfo_interlocutor_item_title">#000000</color>
+    <color name="chatinfo_interlocutor_item_imagetint">#60676d</color>
+	<color name="chatinfo_interlocutor_item_secretchattextcolor">#46bf2b</color>
+	<color name="navigation_phonenumbercolor">#80FFFFFF</color>
+	<!--Contacts-->
+	<color name="contacts_addcontact_floatingbutton_iconcolor">#FFF</color>
+</resources>

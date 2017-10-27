@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group android:id="@+id/menu_top" android:checkableBehavior="single">
+		<item android:id="@+id/main_navigation_new_group" android:icon="@drawable/ic_invite_friend" android:showAsAction="ifRoom" android:title="Neue Gruppe" />
+		<item android:id="@+id/main_navigation_new_secret_chat" android:icon="@drawable/ic_secret_chat" android:showAsAction="ifRoom" android:title="Neuer Geheimer Chat" />
+		<item android:id="@+id/main_navigation_new_channel" android:icon="@drawable/ic_new_channel" android:showAsAction="ifRoom" android:title="Neuer Kanal" />
+	</group>
+	<group android:id="@+id/menu_bottom" android:checkableBehavior="single">
+		<item android:id="@+id/main_navigation_contacts" android:icon="@drawable/ic_users" android:showAsAction="ifRoom" android:title="Kontakte" />
+		<item android:id="@+id/main_navigation_invite" android:icon="@drawable/ic_new_contact" android:showAsAction="ifRoom" android:title="Freunde einladen" />
+		<item android:id="@+id/main_navigation_settings" android:icon="@drawable/ic_settings" android:showAsAction="ifRoom" android:title="Einstellungen" />
+		<item android:id="@+id/main_navigation_questions" android:icon="@drawable/ic_questions" android:showAsAction="ifRoom" android:title="Fragen und Antworten" />
+	</group>
+</menu>

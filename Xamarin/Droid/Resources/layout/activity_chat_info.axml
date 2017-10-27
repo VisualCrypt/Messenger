@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:paddingStart="0dp"
+        android:paddingLeft="0dp"
+        android:theme="@style/ToolbarTheme"
+        style="@style/ToolbarStyle">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingBottom="24dp">
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_width="?android:attr/actionBarSize"
+                android:background="@null"
+                android:src="@drawable/ic_toolbar_back"
+                android:padding="16dp" />
+            <ObsidianMobile.Droid.Core.Widget.RoundedImageView
+                android:id="@+id/chat_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/user_logo"
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:layout_marginStart="20dp" />
+            <TextView
+                android:id="@+id/chat_name"
+                android:text="John Smith"
+                android:layout_toEndOf="@id/chat_image"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_alignTop="@id/chat_image"
+                style="@style/ChatName" />
+            <TextView
+                android:id="@+id/interlocutor_last_visit_or_members_count"
+                android:text="zul. online um 10:35 AM"
+                android:layout_alignStart="@id/chat_name"
+                android:layout_below="@id/chat_name"
+                style="@style/ChatInterlocutorLastVisitOrMembersCount" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:translationZ="6dp"
+        android:layout_marginTop="-28dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_message"
+        app:fabSize="normal"
+        app:backgroundTint="@android:color/white" />
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+        style="@style/ChatInfoInterlocutorItem">
+        <ImageView
+            android:id="@+id/phone_image"
+            android:src="@drawable/ic_phone"
+            style="@style/ChatInfoInterlocutorItemImage" />
+        <TextView
+            android:id="@+id/phone_number"
+            android:text="+43 (66) 533233433"
+            android:layout_toEndOf="@id/phone_image"
+            style="@style/ChatInfoInterlocutorItemTitle" />
+        <TextView
+            android:text="Mobil"
+            android:layout_below="@id/phone_number"
+            android:layout_alignStart="@id/phone_number"
+            style="@style/ChatInfoInterlocutorItemCaption" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/ChatInfoInterlocutorItem">
+        <TextView
+            android:id="@+id/interlocutor_nickname"
+            android:text="johnsmith"
+            android:layout_toEndOf="@id/phone_image"
+            android:layout_marginStart="@dimen/chatinfo_interlocutor_item2_startmargin"
+            style="@style/ChatInfoInterlocutorItemTitle" />
+        <TextView
+            android:text="Benutzername"
+            android:layout_below="@id/interlocutor_nickname"
+            android:layout_alignStart="@id/interlocutor_nickname"
+            style="@style/ChatInfoInterlocutorItemCaption" />
+    </RelativeLayout>
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/chatinfo_interlocutor_item2_startmargin"
+        android:background="@color/divider"
+        android:layout_marginTop="@dimen/chatinfo_interlocutor_itemsdivider_topbottommargin"
+        android:layout_marginBottom="@dimen/chatinfo_interlocutor_itemsdivider_topbottommargin" />
+    <RelativeLayout
+        style="@style/ChatInfoInterlocutorItem">
+        <ImageView
+            android:id="@+id/phone_image"
+            android:src="@drawable/ic_list"
+            style="@style/ChatInfoInterlocutorItemImage" />
+        <TextView
+            android:id="@+id/chat_notifications_settings"
+            android:text="Mitteilungen"
+            android:layout_toEndOf="@id/phone_image"
+            android:layout_centerVertical="true"
+            style="@style/ChatInfoInterlocutorItemTitle" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/ChatInfoInterlocutorItem">
+        <TextView
+            android:id="@+id/chat_notifications_settings"
+            android:text="Geteilite Medien"
+            android:layout_toEndOf="@id/phone_image"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/chatinfo_interlocutor_item2_startmargin"
+            style="@style/ChatInfoInterlocutorItemTitle" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/ChatInfoInterlocutorItem">
+        <TextView
+            android:id="@+id/start_secret_chat"
+            android:text="Geheimen Chat Starten"
+            android:textColor="@color/chatinfo_interlocutor_item_secretchattextcolor"
+            android:layout_toEndOf="@id/phone_image"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/chatinfo_interlocutor_item2_startmargin"
+            style="@style/ChatInfoInterlocutorItemTitle" />
+    </RelativeLayout>
+</LinearLayout>

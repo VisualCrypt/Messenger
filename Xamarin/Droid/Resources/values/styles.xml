@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="ToolbarStyle">
+		<item name="android:elevation">@dimen/material_elevation_toolbar</item>
+		<item name="android:layout_height">?android:attr/actionBarSize</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="popupTheme">@style/ToolbarPopupTheme</item>
+	</style>
+	<style name="ChatInfoInterlocutorItem">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:clickable">true</item>
+		<item name="android:background">?android:attr/selectableItemBackground</item>
+		<item name="android:paddingStart">@dimen/chatinfo_interlocutor_item_startendpadding</item>
+		<item name="android:paddingEnd">@dimen/chatinfo_interlocutor_item_startendpadding</item>
+		<item name="android:paddingLeft">@dimen/chatinfo_interlocutor_item_startendpadding</item>
+		<item name="android:paddingRight">@dimen/chatinfo_interlocutor_item_startendpadding</item>
+		<item name="android:paddingTop">@dimen/chatinfo_interlocutor_item_topbottompadding</item>
+		<item name="android:paddingBottom">@dimen/chatinfo_interlocutor_item_topbottompadding</item>
+	</style>
+	<style name="ChatInfoInterlocutorItemImage">
+		<item name="android:layout_height">@dimen/chatinfo_interlocutor_item_imagesize</item>
+		<item name="android:layout_width">@dimen/chatinfo_interlocutor_item_imagesize</item>
+		<item name="android:layout_centerVertical">true</item>
+	</style>
+	<style name="ChatInfoInterlocutorItemTitle">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:textColor">@color/chatinfo_interlocutor_item_title</item>
+		<item name="android:textSize">@dimen/chatinfo_interlocutor_item_captiontextsize</item>
+		<item name="android:layout_marginStart">@dimen/chatinfo_interlocutor_item_title_startmargin</item>
+	</style>
+	<style name="ChatInfoInterlocutorItemCaption">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:textSize">@dimen/chatinfo_interlocutor_item_captiontextsize</item>
+		<item name="android:layout_marginTop">2dp</item>
+	</style>
+	<style name="ChatName">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:textSize">@dimen/chat_chatname_textsize</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+	<style name="ChatInterlocutorLastVisitOrMembersCount">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:textColor">@color/chat_lastvisit</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+</resources>

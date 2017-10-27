@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chat_backrground"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:paddingStart="0dp"
+        android:paddingLeft="0dp"
+        android:theme="@style/ToolbarTheme"
+        style="@style/ToolbarStyle">
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ObsidianMobile.Droid.Core.Widget.RoundedImageView
+                android:id="@+id/chat_image"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:srcCompat="@drawable/user_logo"
+                android:layout_centerVertical="true" />
+            <TextView
+                android:id="@+id/chat_name"
+                android:text="John Smith"
+                android:layout_marginStart="4dp"
+                android:layout_toEndOf="@id/chat_image"
+                android:layout_alignTop="@id/chat_image"
+                style="@style/ChatName" />
+            <TextView
+                android:text="zul. online um 10:35 AM"
+                android:layout_alignStart="@id/chat_name"
+                android:layout_below="@id/chat_name"
+                style="@style/ChatInterlocutorLastVisitOrMembersCount" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat_message_input_container"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/chat_message_input_container"
+        android:gravity="bottom"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/show_emoji_keyboard"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_smile_not_selected"
+                android:tint="@android:color/darker_gray" />
+            <android.support.text.emoji.widget.EmojiEditText
+                android:id="@+id/chat_message_input"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:maxLines="4"
+                android:background="@null"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_gravity="center_vertical"
+                android:hint="Nachricht" />
+            <ImageButton
+                android:id="@+id/send"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                app:srcCompat="@drawable/ic_chat_send"
+                android:background="@null"
+                android:tint="@color/accent" />
+        </LinearLayout>
+        <ObsidianMobile.Droid.Screen.Chat.Emoji.EmojiKeyboardView
+            android:id="@+id/emoji_keyboard"
+            android:layout_height="280dp"
+            android:layout_width="match_parent"
+            android:visibility="gone" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

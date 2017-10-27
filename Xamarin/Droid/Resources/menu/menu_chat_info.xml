@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/chat_share" android:showAsAction="ifRoom" android:title="Teilen" />
+    <item android:id="@+id/chat_block" android:showAsAction="ifRoom" android:title="Blockieren" />
+    <item android:id="@+id/chat_edit" android:showAsAction="ifRoom" android:title="Bearbeiten" />
+    <item android:id="@+id/chat_delete" android:showAsAction="ifRoom" android:title="Löschen" />
+	<item android:id="@+id/chat_add_shoortcut" android:showAsAction="ifRoom" android:title="Verknüpfung hinzufügen" />
+</menu>

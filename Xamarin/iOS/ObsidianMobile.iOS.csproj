@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{56F09CD3-E6FB-4AFB-B9A1-B1E19C148C34}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ObsidianMobile.iOS</RootNamespace>
+    <AssemblyName>ObsidianMobile.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <IOSDebuggerPort>21423</IOSDebuggerPort>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <IOSDebuggerPort>46974</IOSDebuggerPort>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\packages\Plugin.Share.7.0.1\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\packages\Plugin.Share.7.0.1\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.3.0.3\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.3.0.3\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\xamarin.ios10\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\xamarin.ios10\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\xamarin.ios10\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsSelected.imageset\ChatsSelected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsSelected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsSelected.imageset\paper-plane-5.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsSelected.imageset\paper-plane-6.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsUnselected.imageset\ChatsUnselected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsUnselected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsUnselected.imageset\paper-plane-2.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\ChatsUnselected.imageset\paper-plane-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsSelected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsSelected.imageset\SettingsSelected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsSelected.imageset\settings-5.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsSelected.imageset\settings-6.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsUnselected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsUnselected.imageset\SettingsUnselected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsUnselected.imageset\settings-2.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\SettingsUnselected.imageset\settings-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserSelected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserSelected.imageset\UserSelected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserSelected.imageset\user-5.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserSelected.imageset\user-6.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserUnselected.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserUnselected.imageset\UserUnselected.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserUnselected.imageset\user-2.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\UserUnselected.imageset\user-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Edit.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\Edit.imageset\Edit.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Edit.imageset\new-file-2.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Edit.imageset\new-file-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_incoming.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_incoming.imageset\bubble_incoming.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_incoming.imageset\bubble_incoming%402x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_incoming.imageset\bubble_incoming%403x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_outgoing.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_outgoing.imageset\bubble_outgoing.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_outgoing.imageset\bubble_outgoing%402x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\bubble_outgoing.imageset\bubble_outgoing%403x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Space.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\Space.imageset\Space.jpg" />
+    <ImageAsset Include="Resources\Assets.xcassets\Attach.imageset\Attach.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Attach.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\Attach.imageset\paperclip-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Attach.imageset\paperclip-4.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Send.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\Send.imageset\Send.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Send.imageset\up-arrow-2.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Send.imageset\up-arrow-3.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\TelegramBckg.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\TelegramBckg.imageset\TelegramBckg.jpg" />
+    <ImageAsset Include="Resources\Assets.xcassets\dr.imageset\2017-10-17 14.26.36.jpg" />
+    <ImageAsset Include="Resources\Assets.xcassets\dr.imageset\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Navigation\ObsidianNavigationService.cs" />
+    <Compile Include="Extensions\UIImageViewExtension.cs" />
+    <Compile Include="Views\ContactsList\ContactCell.cs" />
+    <Compile Include="Views\ContactsList\ContactCell.designer.cs">
+      <DependentUpon>ContactCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactsList\ContactsListController.cs" />
+    <Compile Include="Views\ContactsList\ContactsTableViewSource.cs" />
+    <Compile Include="Views\Chat\ChatViewController.cs" />
+    <Compile Include="Views\Chat\Cells\BaseMessageCell.cs" />
+    <Compile Include="Views\Chat\Cells\IncomingMessageCell.cs" />
+    <Compile Include="Views\Chat\Cells\OutgoingMessageCell.cs" />
+    <Compile Include="Views\Chat\ChatCollectionViewSource.cs" />
+    <Compile Include="Views\Chat\ChatLayout.cs" />
+    <Compile Include="Views\BaseViewController.cs" />
+    <Compile Include="Views\ContactDetails\ContactDetailsViewController.cs" />
+    <Compile Include="Views\ContactDetails\ContactDetailsViewController.designer.cs">
+      <DependentUpon>ContactDetailsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseCollectionViewSource.cs" />
+    <Compile Include="Controls\ActiveLabel.cs" />
+    <Compile Include="Controls\InputMessageView.cs" />
+    <Compile Include="Controls\ProfileImageView.cs" />
+    <Compile Include="Controls\Bubble\BubbleMessageView\BaseBubbleMessageView.cs" />
+    <Compile Include="Controls\Bubble\BubbleMessageView\IncomingBubbleMessageView.cs" />
+    <Compile Include="Controls\Bubble\BubbleMessageView\OutgoingBubbleMessageView.cs" />
+    <Compile Include="Controls\Bubble\BubbleView\BaseBubbleView.cs" />
+    <Compile Include="Controls\Bubble\BubbleView\IncomingBubbleView.cs" />
+    <Compile Include="Controls\Bubble\BubbleView\OutgoingBubbleView.cs" />
+    <Compile Include="Controls\Bubble\BubbleDecoratorView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Navigation\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\ContactsList\" />
+    <Folder Include="Views\Chat\" />
+    <Folder Include="Views\ContactDetails\" />
+    <Folder Include="Assets.xcassets\.imageset\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Controls\Bubble\" />
+    <Folder Include="Controls\Bubble\BubbleMessageView\" />
+    <Folder Include="Controls\Bubble\BubbleView\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObsidianMobile.Core\ObsidianMobile.Core.csproj">
+      <Project>{6D440158-038F-4892-A5DD-7C7BBEBE0D8D}</Project>
+      <Name>ObsidianMobile.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Views\ContactsList\ContactCell.xib" />
+    <InterfaceDefinition Include="Views\ContactDetails\ContactDetailsViewController.xib" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+</Project>

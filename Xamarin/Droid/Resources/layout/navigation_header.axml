@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="8dp"
+    android:background="@color/accent">
+    <ObsidianMobile.Droid.Core.Widget.RoundedImageView
+        android:id="@+id/user_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/user_logo" />
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="John Smith"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="12dp" />
+    <TextView
+        android:id="@+id/user_phone_number"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="+43 66 533233433"
+        android:textSize="12sp"
+        android:textColor="@color/navigation_phonenumbercolor"
+        android:layout_marginTop="2dp" />
+</LinearLayout>
